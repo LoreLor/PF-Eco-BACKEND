@@ -4,8 +4,8 @@
   "private": true,
   
   "scripts": {
-    "test":"jest --verbose ./routes",
-    "start": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
