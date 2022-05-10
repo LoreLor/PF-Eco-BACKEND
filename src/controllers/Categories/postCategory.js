@@ -1,3 +1,6 @@
+const Category = require("../../models/Category.js");
+const { types } = require("./arrayCategories");
+
 const postCategory = async (req, res, next) => {
     const { name } = req.body;
 
@@ -9,9 +12,9 @@ const postCategory = async (req, res, next) => {
         })
         if (newCategory[1]) {
             types.push(newCategory[0].name)
-            return res.status(200).send(newCategory[0])
+            return res.status(201).send({msg:"Category added successfully", name :newCategory[0].name})
         } else {
-            return res.status(200).send("Category already exists.")
+            return res.status(304).send({msg:"Category already exists."})
         }
     } catch (error) {
         next(error);
