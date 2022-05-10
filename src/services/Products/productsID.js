@@ -1,9 +1,9 @@
-const modelProduct = require("../models/Product");
+const Product = require("../../models/Product");
 
 async function getById(id,req,res){
     try{
 
-        const detailProduct = await modelProduct.findOne({
+        const detailProduct = await Product.findOne({
             where: id
         })
 
@@ -13,4 +13,4 @@ async function getById(id,req,res){
         console.log(err)
     }
 }
-module.exports=getById
+module.exports = getById
