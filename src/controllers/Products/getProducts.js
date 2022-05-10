@@ -1,6 +1,6 @@
-const getById = require("../../services/productsID");
-const getCategory = require("../../services/productCategory");
-const allProducts = require("../../services/allProducts");
+const getById = require("../../services/Products/productsID");
+const getCategory = require("../../services/Products/productCategory");
+const allProducts = require("../../services/Products/allProducts");
 
 async function getProducts(req, res) {
   try {

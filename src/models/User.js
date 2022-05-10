@@ -9,7 +9,7 @@ const User = sequelize.define('user', {
     allowNull: false,
     primaryKey: true
   },
-  name:{
+  name:{ 
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -31,13 +31,13 @@ const User = sequelize.define('user', {
   },
   dni:{
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
   phone_number:{
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
-  adress:{
+  address:{
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -47,7 +47,7 @@ const User = sequelize.define('user', {
   },
   birthday:{
     type: DataTypes.DATE,
-    allowNull: false,
+    allowNull: true,
   },
 });
 
