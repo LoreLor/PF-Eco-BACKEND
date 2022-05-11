@@ -16,7 +16,7 @@ const createProduct = async (req, res, next) => {
       categories.forEach(async(item) =>{
          const [newCategory, boolCreate] = await Category.findOrCreate({
             where: {
-               name: normalizeString(item)
+               name: normalizeString(item.name)
             }
          });
          await newProduct.addCategory(newCategory);
