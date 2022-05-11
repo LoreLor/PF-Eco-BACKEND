@@ -12,6 +12,10 @@ const sequelize = require("../db");
     name: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
     }
   });
 
