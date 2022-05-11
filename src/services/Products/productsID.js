@@ -1,16 +1,18 @@
 const Product = require("../../models/Product");
 
-async function getById(id,req,res){
+const getById = async(id,req,res)=>{
     try{
 
         const detailProduct = await Product.findOne({
-            where: id
+            where: {
+                id: id
+            }
         })
 
-        res.status(200).json(detailProduct)
+        res.status(200).send(detailProduct)
 
     }catch(err){
         console.log(err)
     }
 }
-module.exports = getById
+module.exports = getById;

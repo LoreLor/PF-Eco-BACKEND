@@ -1,5 +1,8 @@
 const User = require("../../models/User");
 
+const normalizeString = require('../../utils/normalizeString.js');
+
+
 const postUser = async (req, res, next) => {
     const { name, last_name, user_name, email, phone_number, password, dni, address, rol, birthday } = req.body;
     if (!name || !last_name || !user_name || !email || !password || !address) {
@@ -7,8 +10,8 @@ const postUser = async (req, res, next) => {
     }
     try {
         const user = await User.create({
-            name: name,
-            last_name: last_name,
+            name: normalizeString(name),
+            last_name: normalizeString(last_name),
             user_name: user_name,
             email: email,
             password: password,
@@ -19,10 +22,10 @@ const postUser = async (req, res, next) => {
             birthday: birthday,
         })
         return res.status(200).send(user);
+
     } catch (error) {
         next(error);
     }
-
 }
 
 module.exports = postUser;

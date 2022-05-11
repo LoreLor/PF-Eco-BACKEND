@@ -8,7 +8,7 @@ const getUserByID = async (req, res, next) => {
             let userByID = await User.findByPk(id)
             return res.status(200).send(userByID);
         }
-        return res.status(400).send("User not found.")
+        return res.status(400).send("Usuario no encontrado")
     } catch (error) {
         next(error);
     }
