@@ -27,18 +27,7 @@ const postCategory = async (req, res, next) => {
         category: newCategory,
       });
     }
-
-    /*     if (newCategory[1]) {
-      types.push(newCategory[0].name);
-      return res
-        .status(201)
-        .send({
-          msg: "Category added successfully",
-          name: newCategory[0].name,
-        });
-    } else {
-      return res.status(304).send({ msg: "Category already exists." });
-    } */
+    
   } catch (error) {
     next(error);
   }

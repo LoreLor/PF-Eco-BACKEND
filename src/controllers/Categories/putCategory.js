@@ -2,7 +2,7 @@ const Category = require("../../models/Category.js");
 
 const putCategory = async(req, res)=>{
     try{
-
+        
         const {id} = req.params;
         const {name} = req.body;
 
@@ -13,10 +13,10 @@ const putCategory = async(req, res)=>{
                 id
             }
         });
-        res.status(200).send("Se a actulizado a: " + name);
+        res.status(200).send("Se a actualizado a: " + name);
 
     }catch(err){
-        console.log(err)
+        next(err)
     }
 }
 
