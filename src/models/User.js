@@ -58,4 +58,4 @@ const User = sequelize.define('user', {
 module.exports = User
 
 
-//OTRA PRUEBA
+////////////////////////////////
