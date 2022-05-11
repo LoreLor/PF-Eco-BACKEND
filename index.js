@@ -6,7 +6,7 @@ init()
 
 app.listen(3001, () => {
   sequelize
-    .sync({ force: true })
+    .sync({ force: false })
 
     .then(console.log("Conectado a la base de datos"))
     .then(console.log('Listening at 3001'))

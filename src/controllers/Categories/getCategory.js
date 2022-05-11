@@ -1,18 +1,37 @@
 const Category = require("../../models/Category.js");
+const Product = require("../../models/Product.js");
 
-const getCategory = async (req,res,next)=>{
-    const {name}= req.params
-    try {
-        let categorySearch = await Category.findOne({
-            where:{
-                name:name
+const normalizeString = require("../../utils/normalizeString.js");
+
+const getCategory = async(req, res)=>{
+    try{
+
+        const searchCategory = await Category.findOne({
+            where: {
+                name: normalizeString(req.params.name) 
             }
         })
-        console.log(categorySearch)
-        res.status(200).send(categorySearch)
-    } catch (error) {
-        console.log(error)
+
+        if(!searchCategory){
+            return res.status(404).json({
+                message: "Category not found"
+            })
+        }else {
+            const categoryProducts = await Category.findOne({
+                where: {
+                    name: normalizeString(req.params.name)
+                },
+                include: [{
+                    model: Product,
+                    atributes: ["name", "description", "price", "image", "category"]
+                }]
+            })
+            res.status(200).send(categoryProducts)
+        }
+
+    }catch(err){
+        console.log(err)
     }
 }
 
-module.exports = getCategory
+module.exports = getCategory;

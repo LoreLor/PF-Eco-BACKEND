@@ -4,10 +4,12 @@ const getCategories = require("../controllers/Categories/getCategories.js");
 const getCategory = require('../controllers/Categories/getCategory.js')
 const postCategory = require("../controllers/Categories/postCategory.js");
 const deleteCategory = require("../controllers/Categories/deleteCategory.js");
+const putCategory = require("../controllers/Categories/putCategory.js");
 
 router.get('/', getCategories)
 router.get('/:name',getCategory)
 router.post('/', postCategory)
 router.delete('/:id', deleteCategory)
+router.put("/:id", putCategory)
 
 module.exports = router
