@@ -26,9 +26,8 @@ const putUser = async (req, res, next) => {
             message: "Usuario actualizado correctamente"
         })
         
-
     }catch(err){
-        console.log(err)
+        next(err)
     }
 }
 

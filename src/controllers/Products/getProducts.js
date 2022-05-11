@@ -16,7 +16,7 @@ async function getProducts(req, res) {
       await allProducts(res);
     }
   } catch (err) {
-    console.log(err);
+    next(err);
   }
 }
 
