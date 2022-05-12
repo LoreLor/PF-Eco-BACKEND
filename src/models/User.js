@@ -50,10 +50,6 @@ const User = sequelize.define('user', {
     type: DataTypes.DATE,
     allowNull: true,
   },
-  active: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: true,
-  }
 });
 
 module.exports = User

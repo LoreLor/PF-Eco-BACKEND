@@ -6,8 +6,8 @@ const convertToInt = require("../../utils/convertToInt.js");
 
 const postProduct = async (req, res, next) => {
    const { name, img, price, description, stock, rating, categories } = req.body;
-   if(!name || !img || !price || !description || !stock || rating < 0 || rating > 5 || !categories  ){return res.status(400).send("Check the fields.")}
-   
+   if (!name || !img || !price || !description || !stock || rating < 0 || rating > 5 || !categories) return res.status(400).send("Check the fields.");
+
    try {
       const newProduct = await Product.create({
          name: normalizeString(name),
@@ -18,15 +18,12 @@ const postProduct = async (req, res, next) => {
          const [newCategory, boolCreate] = await Category.findOrCreate({
             where: {
                name: normalizeString(item),
-               active: true,
             }
          });
-         if (newCategory.dataValues.active) {
-            await newProduct.addCategory(newCategory);
-         }
+         await newProduct.addCategory(newCategory);
       })
 
-      res.status(201).json({msg:"Producto creado exitosamente",name: newProduct.name});
+      res.status(201).json({ msg: "Producto creado exitosamente", name: newProduct.name });
    } catch (error) {
       next(error);
    }
