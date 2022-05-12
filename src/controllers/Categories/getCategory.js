@@ -9,7 +9,6 @@ const getCategory = async (req, res, next) => {
         const searchCategory = await Category.findOne({
             where: {
                 name: normalizeString(req.params.name),
-                active: true,
             }
         })
 
@@ -21,11 +20,13 @@ const getCategory = async (req, res, next) => {
             const categoryProducts = await Category.findOne({
                 where: {
                     name: normalizeString(req.params.name),
-                    active: true,
                 },
                 include: [{
                     model: Product,
-                    atributes: ["name", "description", "price", "image", "category"]
+                    atributes: ["name", "description", "price", "image", "category"],
+                    through: {
+                        attributes: []
+                    }
                 }]
             })
             res.status(200).send(categoryProducts)

@@ -14,7 +14,6 @@ const postCategory = async (req, res, next) => {
     const existCategory = await Category.findOne({
       where: {
         name: normalizeString(name),
-        active: true
       },
     });
 

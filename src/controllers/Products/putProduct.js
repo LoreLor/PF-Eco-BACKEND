@@ -41,7 +41,6 @@ const putProduct = async (req, res, next) => {
          let categoriesID = await Category.findAll({
             where: {
                name: categories,
-               active: true
             }
          })
          product.removeCategories();

@@ -15,11 +15,7 @@ const getProductByID = async (req, res, next) => {
           }
         }]
       })
-      if (productByID) {
-        if (productByID.dataValues.active) {
-          return res.status(200).send(productByID);
-        }
-      }
+      return res.status(200).send(productByID);
     }
     return res.status(400).send("Producto no encontrado")
   } catch (error) {
