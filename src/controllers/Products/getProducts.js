@@ -2,13 +2,13 @@ const getById = require("../../services/Products/productsID");
 const getCategory = require("../../services/Products/productCategory");
 const allProducts = require("../../services/Products/allProducts");
 
-async function getProducts(req, res) {
+async function getProducts(req, res,next) {
   try {
     const { category } = req.query;
     const { id } = req.params;
 
     if (id) {
-      await getById(id, req, res);
+      await  getById(id, req, res);
     }
     if (category) {
       await getCategory(category, req, res);

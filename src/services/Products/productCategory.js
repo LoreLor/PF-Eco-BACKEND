@@ -1,5 +1,5 @@
 async function category(category, req, res) {
 
-    res.send(category)
+    return res.send(category)
 }
 module.exports = category

@@ -29,10 +29,14 @@ const Product = sequelize.define("product", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  isActive:{
+    type: DataTypes.ENUM("Activo","Inactivo"),
+    allowNull: false,
+  },
   stock:{
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-});
+},{ timestamps: false });
 
 module.exports = Product;

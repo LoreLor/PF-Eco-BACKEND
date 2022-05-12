@@ -13,6 +13,6 @@ const sequelize = require("../db");
       type: DataTypes.STRING,
       allowNull: false
     }
-  });
+  },{ timestamps: false });
 
 module.exports = Category;

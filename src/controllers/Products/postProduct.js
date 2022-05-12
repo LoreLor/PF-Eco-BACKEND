@@ -5,9 +5,10 @@ const normalizeString = require('../../utils/normalizeString.js');
 const convertToInt = require("../../utils/convertToInt.js");
 
 const createProduct = async (req, res, next) => {
-   const { name, img, price, description, stock, rating, categories } = req.body;
+   const {name, img, price, description, stock, rating, categories,isActive } = req.body;
    try {
       const newProduct = await Product.create({
+         isActive,
          name: normalizeString(name), 
          price, img, description,stock: convertToInt(stock), 
          rating: convertToInt(rating) 
@@ -20,9 +21,13 @@ const createProduct = async (req, res, next) => {
             }
          });
          await newProduct.addCategory(newCategory);
-      })
-
-      res.status(200).send(`Producto con nombre ${name}, creado`);
+      });
+      const productDb = await Product.findOne({
+         where: {
+             name: name
+         }
+      });
+      res.status(201).json({msg:"Producto creado exitosamente",id: productDb.id});
    } catch (error) {
       next(error);
    }
