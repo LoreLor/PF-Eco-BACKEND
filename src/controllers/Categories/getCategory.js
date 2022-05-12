@@ -3,7 +3,7 @@ const Product = require("../../models/Product.js");
 
 const normalizeString = require("../../utils/normalizeString.js");
 
-const getCategory = async(req, res)=>{
+const getCategory = async(req, res, next)=>{
     try{
 
         const searchCategory = await Category.findOne({

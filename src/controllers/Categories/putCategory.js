@@ -1,6 +1,6 @@
 const Category = require("../../models/Category.js");
 
-const putCategory = async (req, res) => {
+const putCategory = async (req, res, next) => {
     const { id } = req.params;
     const { name } = req.body;
     try {
