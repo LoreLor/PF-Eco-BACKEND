@@ -15,12 +15,6 @@ const getProducts = async (req, res, next) => {
           }
         }]
       },
-      {
-        where:
-        {
-          active: true,
-        }
-      },
       )
     if (name) {
       let productByName = allProducts.filter(r => normalizeString(r.dataValues.name).includes(normalizeString(name.toString())));
@@ -29,7 +23,8 @@ const getProducts = async (req, res, next) => {
       }
       return res.status(400).send("Producto no encontrado.");
     } else {
-      res.status(200).send(allProducts);
+      let showedProducts = allProducts.filter(r => r.dataValues.active === true);
+      return res.status(200).send(showedProducts);
     }
   } catch (error) {
     next(error);
