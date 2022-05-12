@@ -8,7 +8,7 @@ const deleteCategory = require("../controllers/Categories/deleteCategory.js");
 const putCategory = require("../controllers/Categories/putCategory.js");
 
 router.get('/', getCategories)
-router.get('/:name',getCategory)
+router.get('/:name', getCategory)
 router.post('/', postCategory)
 router.post('/bulk', bulkCategories)
 router.delete('/:id', deleteCategory)

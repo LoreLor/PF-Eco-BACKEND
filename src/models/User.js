@@ -1,52 +1,52 @@
 const { DataTypes } = require('sequelize');
 
-const sequelize=require('../db')
+const sequelize = require('../db')
 
 const User = sequelize.define('user', {
-  id:{
+  id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     allowNull: false,
     primaryKey: true
   },
-  name:{ 
+  name: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  last_name:{
+  last_name: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  user_name:{
+  user_name: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  email:{
+  email: {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true
-  }, 
-  password:{
+  },
+  password: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  dni:{
+  dni: {
     type: DataTypes.INTEGER,
     allowNull: true,
   },
-  phone_number:{
+  phone_number: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  address:{
+  address: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  rol:{
+  rol: {
     type: DataTypes.ENUM("admin", "user"),
     //sin rol es invitado
   },
-  birthday:{
+  birthday: {
     type: DataTypes.DATE,
     allowNull: true,
   },
@@ -54,5 +54,3 @@ const User = sequelize.define('user', {
 
 module.exports = User
 
-
-////////////////////////////////

@@ -1,16 +1,16 @@
 const User = require("../../models/User.js");
-const  generateToken = require("../../utils/generateToken.js");
-const  bcrypt = require("bcryptjs")
+const generateToken = require("../../utils/generateToken.js");
+const bcrypt = require("bcryptjs")
 
-const userSignin = async(req, res, next) => {
-    const {email, password} = req.body;
+const userSignin = async (req, res, next) => {
+    const { email, password } = req.body;
     const user = await User.findOne({
-        where:{
+        where: {
             email: email,
         }
     });
-    if(user){
-        if(bcrypt.compareSync(password, user.password)){
+    if (user) {
+        if (bcrypt.compareSync(password, user.password)) {
             res.send({
                 id: user.id,
                 user_name: user.user_name,
@@ -21,7 +21,7 @@ const userSignin = async(req, res, next) => {
             return;
         }
     };
-    res.status(401).send({msg:'Invalid email or password'})
+    res.status(401).send({ msg: 'Invalid email or password' })
 };
 
 
