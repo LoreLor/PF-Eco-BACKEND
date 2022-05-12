@@ -2,23 +2,6 @@ const Category = require("../../models/Category.js");
 const Product = require("../../models/Product.js");
 const normalizeString = require("../../utils/normalizeString.js");
 
-<<<<<<< HEAD
-async function getProducts(req, res,next) {
-  try {
-    const { category } = req.query;
-    const { id } = req.params;
-
-    if (id) {
-      await  getById(id, req, res);
-    }
-    if (category) {
-      await getCategory(category, req, res);
-    } else {
-      await allProducts(res);
-    }
-  } catch (err) {
-    next(err);
-=======
 const getProducts = async(req, res, next)=>{
   const { name } = req.query;
   try {
@@ -42,7 +25,6 @@ const getProducts = async(req, res, next)=>{
       }
   } catch (error) {
       next(error);
->>>>>>> 07a456e979ec5ff1dfc2c93f8d6356e7d7ccd228
   }
 }
 
