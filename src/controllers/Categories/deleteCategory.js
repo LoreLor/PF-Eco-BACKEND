@@ -2,12 +2,27 @@ const Category = require("../../models/Category");
 
 const deleteCategory = async (req, res, next) => {
     let { id } = req.params;
+
     try {
-        res.json(await Category.destroy({
+        const category = await Category.findByPk(id);
+        if(category){
+            if(category.dataValues.active === false) {
+                return res.status(400).send("La categoría ya fue eliminada.")
+            }
+        }
+        
+        const updateActive = await Category.update({
+            active: false,
+        }, {
             where: {
                 id
             }
-        }));
+        });
+        if(updateActive[0] !== 0) {
+            res.status(200).send("Categoría eliminada correctamente.")
+        } else {
+            res.status(400).send("Categoria no encontrada.")
+        }
     } catch (error) {
         next(error)
     }
