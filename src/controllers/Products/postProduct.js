@@ -4,7 +4,7 @@ const Category = require("../../models/Category.js");
 const normalizeString = require('../../utils/normalizeString.js');
 const convertToInt = require("../../utils/convertToInt.js");
 
-const createProduct = async (req, res, next) => {
+const postProduct = async (req, res, next) => {
    const { name, img, price, description, stock, rating, categories } = req.body;
    if(!name || !img || !price || !description || !stock || rating < 0 || rating > 5 || !categories  ){return res.status(400).send("Check the fields.")}
    
@@ -32,4 +32,4 @@ const createProduct = async (req, res, next) => {
    }
 }
 
-module.exports = createProduct;
+module.exports = postProduct;
