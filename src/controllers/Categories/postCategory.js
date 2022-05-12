@@ -1,12 +1,11 @@
 const Category = require("../../models/Category.js");
-const { types } = require("./arrayCategories");
 
 const normalizeString = require("../../utils/normalizeString.js");
 
 const postCategory = async (req, res, next) => {
   const { name } = req.body;
 
-  if(!name) {
+  if (!name) {
     return res.status(400).send("Category cannot be null.")
   }
 
@@ -32,7 +31,7 @@ const postCategory = async (req, res, next) => {
 
       });
     }
-    
+
   } catch (error) {
     next(error);
   }

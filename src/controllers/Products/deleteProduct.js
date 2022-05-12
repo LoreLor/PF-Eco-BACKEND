@@ -2,7 +2,7 @@ const Product = require("../../models/Product.js");
 
 const deleteProduct = async (req, res, next) => {
     const { id } = req.params;
-    
+
     try {
         const product = await Product.findByPk(id);
         if (product) {

@@ -25,11 +25,11 @@ const Product = sequelize.define("product", {
     type: DataTypes.STRING,
     allowNull: false
   },
-  rating:{
+  rating: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  stock:{
+  stock: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },

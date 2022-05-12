@@ -1,7 +1,7 @@
 const User = require("../../models/User.js");
 
 const deleteUser = async (req, res, next) => {
-    try{
+    try {
 
         const { id } = req.params;
 
@@ -14,7 +14,7 @@ const deleteUser = async (req, res, next) => {
             message: "Usuario eliminado correctamente"
         })
 
-    }catch(err){
+    } catch (err) {
         next(err)
     }
 }
