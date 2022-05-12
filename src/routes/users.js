@@ -6,11 +6,13 @@ const getUsers = require("../controllers/Users/getUsers");
 const getUserByID = require("../controllers/Users/getUserByID");
 const deleteUser = require("../controllers/Users/deleteUser");
 const putUser = require("../controllers/Users/putUser");
+const userSignin = require("../controllers/Users/userSignin");
 
 router.post("/", postUser);
 router.get("/", getUsers);
 router.get("/:id", getUserByID);
 router.delete("/:id", deleteUser);
 router.put("/:id", putUser);
+router.post("/signin", userSignin);
 
 module.exports = router;
