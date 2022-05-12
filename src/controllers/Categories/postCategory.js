@@ -27,9 +27,10 @@ const postCategory = async (req, res, next) => {
         name: normalizeString(name),
       });
 
-      res.status(200).json({
+      res.status(201).json({
         msg: "Categoria creada correctamente",
-        category: newCategory,
+        name: newCategory.name,
+
       });
     }
     

@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-let getProducts = require('../controllers/Products/getProducts')
+let getProducts = require('../controllers/Products/getProducts.js')
 let postProduct = require('../controllers/Products/postProduct.js')
 let bulkProducts = require('../controllers/Products/bulkProducts.js')
 let putProduct = require('../controllers/Products/putProduct.js')

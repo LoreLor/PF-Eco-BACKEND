@@ -17,6 +17,6 @@ const sequelize = require("../db");
       type: DataTypes.BOOLEAN,
       defaultValue: true,
     }
-  });
+  },{ timestamps: false });
 
 module.exports = Category;
