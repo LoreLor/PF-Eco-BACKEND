@@ -6,6 +6,7 @@ const convertToInt = require("../../utils/convertToInt.js");
 
 const createProduct = async (req, res, next) => {
    const {name, img, price, description, stock, rating, categories,isActive } = req.body;
+   console.log(name)
    try {
       const newProduct = await Product.create({
          isActive,
@@ -17,7 +18,7 @@ const createProduct = async (req, res, next) => {
       categories.forEach(async(item) =>{
          const [newCategory, boolCreate] = await Category.findOrCreate({
             where: {
-               name: normalizeString(item.name)
+               name: normalizeString(item)
             }
          });
          await newProduct.addCategory(newCategory);
