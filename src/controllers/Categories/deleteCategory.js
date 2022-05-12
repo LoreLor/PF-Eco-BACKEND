@@ -5,12 +5,12 @@ const deleteCategory = async (req, res, next) => {
 
     try {
         const category = await Category.findByPk(id);
-        if(category){
-            if(category.dataValues.active === false) {
+        if (category) {
+            if (category.dataValues.active === false) {
                 return res.status(400).send("La categoría ya fue eliminada.")
             }
         }
-        
+
         const updateActive = await Category.update({
             active: false,
         }, {
@@ -18,10 +18,10 @@ const deleteCategory = async (req, res, next) => {
                 id
             }
         });
-        if(updateActive[0] !== 0) {
-            res.status(200).send("Categoría eliminada correctamente.")
+        if (updateActive[0] !== 0) {
+            return res.status(200).send("Categoría eliminada correctamente.")
         } else {
-            res.status(400).send("Categoria no encontrada.")
+            return res.status(400).send("Categoria no encontrada.")
         }
     } catch (error) {
         next(error)

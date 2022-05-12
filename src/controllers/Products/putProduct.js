@@ -5,11 +5,11 @@ const normalizeString = require('../../utils/normalizeString.js');
 const convertToInt = require("../../utils/convertToInt.js");
 
 const putProduct = async (req, res, next) => {
-   try{
+   try {
 
       const { id } = req.params;
       const { name, img, price, description, stock, rating, categories } = req.body;
-   
+
       // Si alguno de los datos del formulario llega vacío, retorna "Fields cannot be null".
       if (id && name && img && price && description) {
          // Actualizo el producto con los datos que llegan del formulario.
@@ -25,7 +25,7 @@ const putProduct = async (req, res, next) => {
                id,
             }
          });
-   
+
          // Lógica para actualizar las categorías del producto.
          // Las categorías llegan del formulario en un array, si se modifican o se añaden
          // en esta parte se actualizará dicho array.
@@ -40,19 +40,20 @@ const putProduct = async (req, res, next) => {
          })
          let categoriesID = await Category.findAll({
             where: {
-               name: categories
+               name: categories,
+               active: true
             }
          })
          product.removeCategories();
          product.setCategories(categoriesID)
          product.save();
-   
+
          return res.status(200).send(productEdited + " products were edited.");
       } else {
          return res.status(400).send("Fields cannot be null")
       }
 
-   }catch(err){
+   } catch (err) {
       next(err);
    }
 }

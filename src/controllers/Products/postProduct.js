@@ -6,20 +6,24 @@ const convertToInt = require("../../utils/convertToInt.js");
 
 const createProduct = async (req, res, next) => {
    const { name, img, price, description, stock, rating, categories } = req.body;
+   if(!name || !img || !price || !description || !stock || !rating) return res.status(400).send("Check the fields.")
    try {
       const newProduct = await Product.create({
-         name: normalizeString(name), 
-         price, img, description,stock: convertToInt(stock), 
-         rating: convertToInt(rating) 
+         name: normalizeString(name),
+         price, img, description, stock: convertToInt(stock),
+         rating: convertToInt(rating)
       });
-      
-      categories.forEach(async(item) =>{
+      if(!categories) return res.status(400).send("No esta mandando las categories.")
+      categories.forEach(async (item) => {
          const [newCategory, boolCreate] = await Category.findOrCreate({
             where: {
-               name: normalizeString(item.name)
+               name: normalizeString(item),
+               active: true,
             }
          });
-         await newProduct.addCategory(newCategory);
+         if (newCategory.dataValues.active) {
+            await newProduct.addCategory(newCategory);
+         }
       })
 
       res.status(200).send(`Producto con nombre ${name}, creado`);
