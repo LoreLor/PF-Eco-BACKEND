@@ -6,6 +6,10 @@ const normalizeString = require("../../utils/normalizeString.js");
 const postCategory = async (req, res, next) => {
   const { name } = req.body;
 
+  if(!name) {
+    return res.status(400).send("Category cannot be null.")
+  }
+
   try {
     const existCategory = await Category.findOne({
       where: {
@@ -13,7 +17,7 @@ const postCategory = async (req, res, next) => {
       },
     });
 
-    if (existCategory) {
+    if (existCategory.dataValues.active) {
       res.status(400).json({
         msg: "La categoria ya existe en la base de datos",
       });
