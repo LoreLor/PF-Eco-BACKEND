@@ -6,14 +6,14 @@ const convertToInt = require("../../utils/convertToInt.js");
 
 const createProduct = async (req, res, next) => {
    const { name, img, price, description, stock, rating, categories } = req.body;
-   if(!name || !img || !price || !description || !stock || !rating || !categories) return res.status(400).send("Check the fields.")
+   if(!name || !img || !price || !description || !stock || rating < 0 || rating > 5 || !categories  ){return res.status(400).send("Check the fields.")}
+   
    try {
       const newProduct = await Product.create({
          name: normalizeString(name),
          price, img, description, stock: convertToInt(stock),
          rating: convertToInt(rating)
       });
-
       categories.forEach(async (item) => {
          const [newCategory, boolCreate] = await Category.findOrCreate({
             where: {
