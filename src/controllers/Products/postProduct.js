@@ -5,29 +5,28 @@ const normalizeString = require('../../utils/normalizeString.js');
 const convertToInt = require("../../utils/convertToInt.js");
 
 const createProduct = async (req, res, next) => {
-   const {name, img, price, description, stock, rating, categories,active } = req.body;
+   const { name, img, price, description, stock, rating, categories } = req.body;
+   if(!name || !img || !price || !description || !stock || !rating || !categories) return res.status(400).send("Check the fields.")
    try {
       const newProduct = await Product.create({
-         active,
-         name: normalizeString(name), 
-         price, img, description,stock: convertToInt(stock), 
-         rating: convertToInt(rating) 
+         name: normalizeString(name),
+         price, img, description, stock: convertToInt(stock),
+         rating: convertToInt(rating)
       });
-      
-      categories.forEach(async(item) =>{
+
+      categories.forEach(async (item) => {
          const [newCategory, boolCreate] = await Category.findOrCreate({
             where: {
-               name: normalizeString(item)
+               name: normalizeString(item),
+               active: true,
             }
          });
-         await newProduct.addCategory(newCategory);
-      });
-      const productDb = await Product.findOne({
-         where: {
-             name: name
+         if (newCategory.dataValues.active) {
+            await newProduct.addCategory(newCategory);
          }
-      });
-      res.status(201).json({msg:"Producto creado exitosamente",id: productDb.id});
+      })
+
+      res.status(201).json({msg:"Producto creado exitosamente",name: newProduct.name});
    } catch (error) {
       next(error);
    }

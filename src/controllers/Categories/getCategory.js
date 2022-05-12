@@ -3,23 +3,25 @@ const Product = require("../../models/Product.js");
 
 const normalizeString = require("../../utils/normalizeString.js");
 
-const getCategory = async(req, res, next)=>{
-    try{
+const getCategory = async (req, res, next) => {
+    try {
 
         const searchCategory = await Category.findOne({
             where: {
-                name: normalizeString(req.params.name) 
+                name: normalizeString(req.params.name),
+                active: true,
             }
         })
 
-        if(!searchCategory){
+        if (!searchCategory) {
             return res.status(404).json({
                 message: "Category not found"
             })
-        }else {
+        } else {
             const categoryProducts = await Category.findOne({
                 where: {
-                    name: normalizeString(req.params.name)
+                    name: normalizeString(req.params.name),
+                    active: true,
                 },
                 include: [{
                     model: Product,
@@ -29,7 +31,7 @@ const getCategory = async(req, res, next)=>{
             res.status(200).send(categoryProducts)
         }
 
-    }catch(err){
+    } catch (err) {
         next(err)
     }
 }

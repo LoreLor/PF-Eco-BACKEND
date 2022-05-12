@@ -14,9 +14,11 @@ const postCategory = async (req, res, next) => {
     const existCategory = await Category.findOne({
       where: {
         name: normalizeString(name),
+        active: true
       },
     });
-    if (existCategory && existCategory.active) {
+
+    if (existCategory) {
       res.status(400).json({
         msg: "La categoria ya existe en la base de datos",
       });
