@@ -5,11 +5,10 @@ const normalizeString = require('../../utils/normalizeString.js');
 const convertToInt = require("../../utils/convertToInt.js");
 
 const createProduct = async (req, res, next) => {
-   const {name, img, price, description, stock, rating, categories,isActive } = req.body;
-   console.log(name)
+   const {name, img, price, description, stock, rating, categories,active } = req.body;
    try {
       const newProduct = await Product.create({
-         isActive,
+         active,
          name: normalizeString(name), 
          price, img, description,stock: convertToInt(stock), 
          rating: convertToInt(rating) 

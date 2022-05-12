@@ -16,8 +16,7 @@ const postCategory = async (req, res, next) => {
         name: normalizeString(name),
       },
     });
-
-    if (existCategory.dataValues.active) {
+    if (existCategory && existCategory.active) {
       res.status(400).json({
         msg: "La categoria ya existe en la base de datos",
       });
