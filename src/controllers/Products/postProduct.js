@@ -1,10 +1,13 @@
 const Product = require("../../models/Product.js");
 const Category = require("../../models/Category.js");
 
+
+
 const normalizeString = require('../../utils/normalizeString.js');
 const convertToInt = require("../../utils/convertToInt.js");
 
 const postProduct = async (req, res, next) => {
+   console.log(req.file)
    const { name, img, price, description, stock, rating, categories } = req.body;
    if (!name || !img || !price || !description || !stock || rating < 0 || rating > 5 || !categories) return res.status(400).send("Check the fields.");
 

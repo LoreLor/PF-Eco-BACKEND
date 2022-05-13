@@ -8,6 +8,7 @@ let putProduct = require('../controllers/Products/putProduct.js')
 let deleteProduct = require('../controllers/Products/deleteProduct.js');
 const getProductByID = require("../controllers/Products/getProductByID");
 
+
 router.get('/', getProducts);
 router.get('/:id', getProductByID);
 router.post('/', postProduct);
