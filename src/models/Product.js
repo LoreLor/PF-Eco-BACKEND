@@ -14,7 +14,7 @@ const Product = sequelize.define("product", {
     allowNull: false
   },
   img: {
-    type: DataTypes.STRING,
+    type: DataTypes.ARRAY(DataTypes.STRING),
     allowNull: false
   },
   price: {
@@ -22,7 +22,7 @@ const Product = sequelize.define("product", {
     allowNull: false
   },
   description: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false
   },
   rating: {
