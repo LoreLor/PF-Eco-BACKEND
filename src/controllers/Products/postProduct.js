@@ -11,7 +11,6 @@ const cloudinaryMethod = async (file) =>{
     return new Promise (resolve=>{
         cloudinary.uploader.upload(file,(err,res)=>{
             if(err) return res.status(500).send("Upload fail")
-            console.log(res.secure_url)
             resolve({
                 res: res. secure_url
             })
@@ -33,7 +32,6 @@ const postProduct =async (req,res,next)=>{
         urls.push(newPath.res)
         fs.unlinkSync(path)
     }
-    console.log(urls)
     const newProduct = await Product.create({
         name: normalizeString(name),
         price, 
