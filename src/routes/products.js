@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+const uploadPictures = require('../middleware/multer.js')
 
 let getProducts = require('../controllers/Products/getProducts.js')
 let postProduct = require('../controllers/Products/postProduct.js')
@@ -11,7 +12,7 @@ const getProductByID = require("../controllers/Products/getProductByID");
 
 router.get('/', getProducts);
 router.get('/:id', getProductByID);
-router.post('/', postProduct);
+router.post('/',uploadPictures(), postProduct);
 router.post('/bulk', bulkProducts);
 router.put('/:id', putProduct);
 router.delete('/:id', deleteProduct);
