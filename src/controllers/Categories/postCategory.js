@@ -18,7 +18,7 @@ const postCategory = async (req, res, next) => {
 
     if (existCategory) {
       res.status(400).json({
-        msg: "La categoria ya existe en la base de datos",
+        msg: "Category already exists",
       });
     } else {
       let newCategory = await Category.create({
@@ -26,7 +26,7 @@ const postCategory = async (req, res, next) => {
       });
 
       res.status(201).json({
-        msg: "Categoria creada correctamente",
+        msg: "Category created",
         name: newCategory.name,
 
       });
