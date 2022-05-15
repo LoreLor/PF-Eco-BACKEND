@@ -14,7 +14,9 @@ const putCategory = async (req, res, next) => {
         });
 
         if (updateCategory[0] !== 0) {
-            res.status(200).send("Se a actualizado a: " + name);
+            res.status(201).json({
+            msg: "Category updated",
+            name: updateCategory.name,});
         } else {
             res.status(400).send("Categoria no encontrada.")
         }
