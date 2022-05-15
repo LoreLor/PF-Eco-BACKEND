@@ -11,7 +11,7 @@ const putProduct = async (req, res, next) => {
       const { name, img, price, description, stock, rating, categories } = req.body;
 
       // Si alguno de los datos del formulario llega vacío, retorna "Fields cannot be null".
-      if (id && name && img && price && description) {
+      if (id && name && img.length && price && description) {
          // Actualizo el producto con los datos que llegan del formulario.
          let productEdited = await Product.update({
             name: normalizeString(name),
