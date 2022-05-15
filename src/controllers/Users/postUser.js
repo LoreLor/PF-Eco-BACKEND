@@ -1,18 +1,19 @@
 const User = require("../../models/User");
-const generateToken = require("../../utils/generateToken");
+let {generateToken} = require("../../utils/generateToken.js");
 const bcrypt = require("bcryptjs")
 const normalizeString = require('../../utils/normalizeString.js');
 
 
-const postUser = async (req, res, next) => {
+
+const postUser =  async (req, res, next) => {
     const { name, last_name, user_name, email, phone_number, password, dni, address, rol, birthday } = req.body;
     if (!name || !last_name || !user_name || !email || !password || !address) {
         res.status(400).json({ msg: "Faltan datos" });
     }
     try {
         const user = await User.create({
-            name: normalizeString(name),
-            last_name: normalizeString(last_name),
+            name: name,
+            last_name: last_name,
             user_name: user_name,
             email: email,
             password: bcrypt.hashSync(password, 8),
@@ -22,18 +23,20 @@ const postUser = async (req, res, next) => {
             rol: rol,
             birthday: birthday,
         })
-        return res.status(200).send({
-            name: normalizeString(user.name),
-            last_name: normalizeString(user.last_name),
-            user_name: user.user_name,
-            email: user.email,
-            token: generateToken(user),
-            dni: user.dni,
-            phone_number: user.phone_number,
-            address: user.address,
-            rol: user.rol,
-            birthday: user.birthday,
-        });
+        user = await user.save()
+       res.send({
+           name:user.name,
+           last_name:user.last_name,
+           user_name:user.user_name,
+           email:user.email,
+           dni:user.dni,
+           phone_number:user.phone_number,
+           address:user.address,
+           rol:user.rol,
+           birthday:user.birthday,   
+           token:generateToken(user.password)    
+
+       }) 
 
     } catch (error) {
         next(error);

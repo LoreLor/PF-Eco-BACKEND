@@ -15,4 +15,24 @@ const generateToken = (user) => {
     )
 };
 
-module.exports = generateToken;
+ const isAuth = (req, res, next) => {
+    const authorization = req.headers.authorization;
+    if(authorization){
+        const token = authorization.slice(7, authorization.length); //Bearer xxxxxx
+        jwt.verify(token, procee.env.JWT_KEY || 'secret', (error, decode) => {
+            if(error){
+                res.status(401).send({msg:'Invalid token'})            
+            }else{
+                req.user = decode;
+                next();
+            }
+        })
+    }else{
+        res.status(404).send({msg:'Not Token'})
+    }
+}
+
+module.exports = {
+    generateToken,
+    isAuth
+}
