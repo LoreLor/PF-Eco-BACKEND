@@ -5,8 +5,6 @@ const typesCategories = [
     {"name": "xiaomi"},
     {"name": "lg"},
     {"name": "huawei"},
-    {"name": "alcatel"},
-    {"name": "nokia"}
 ];
 
 module.exports = {
