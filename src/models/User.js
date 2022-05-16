@@ -20,6 +20,7 @@ const User = sequelize.define('user', {
   user_name: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true
   },
   img: {
     type: DataTypes.TEXT,
