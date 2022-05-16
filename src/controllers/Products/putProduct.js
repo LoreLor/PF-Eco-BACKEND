@@ -1,31 +1,54 @@
+const cloudinary = require('../../middleware/cloudinary.js')
+const fs = require('fs')
+
 const Product = require("../../models/Product.js");
 const Category = require("../../models/Category.js");
 
 const normalizeString = require('../../utils/normalizeString.js');
 const convertToInt = require("../../utils/convertToInt.js");
 
+const cloudinaryMethod = async (file) =>{
+   return new Promise (resolve=>{
+       cloudinary.uploader.upload(file,(err,res)=>{
+           if(err) return res.status(500).send("Upload fail")
+           resolve({
+               res: res. secure_url
+           })
+       })
+   })
+}
+
 const putProduct = async (req, res, next) => {
+   const { id } = req.params;
+   const {input} = req.body
+   const formData = JSON.parse(input)
+   const { name, img, price, description, stock, rating, categories } = formData;
+   // Si alguno de los datos del formulario llega vacío, retorna "Check the fields".
+   if (!name || /* !img || */ !price || !description || !stock || !categories) return res.status(400).json({msg:"Check the fields."})
    try {
-
-      const { id } = req.params;
-      const { name, img, price, description, stock, rating, categories } = req.body;
-
-      // Si alguno de los datos del formulario llega vacío, retorna "Fields cannot be null".
-      if (id && name && img.length && price && description) {
+      console.log(name)
+      console.log(id)
+      const urls = [];
+      const files = req.files;
+      for(const file of files){
+          const {path} = file;
+          const newPath = await cloudinaryMethod(path)
+          urls.push(newPath.res)
+          fs.unlinkSync(path)
+      }     
+      
          // Actualizo el producto con los datos que llegan del formulario.
          let productEdited = await Product.update({
             name: normalizeString(name),
-            img,
-            price,
-            description: normalizeString(description),
+            price:convertToInt(price),
+            img: [...img,...urls],
+            description: description,
             stock: convertToInt(stock),
-            rating: convertToInt(rating)
          }, {
             where: {
                id,
             }
          });
-
          // Lógica para actualizar las categorías del producto.
          // Las categorías llegan del formulario en un array, si se modifican o se añaden
          // en esta parte se actualizará dicho array.
@@ -47,13 +70,9 @@ const putProduct = async (req, res, next) => {
          product.setCategories(categoriesID)
          product.save();
 
-         return res.status(200).send(productEdited + " products were edited.");
-      } else {
-         return res.status(400).send("Fields cannot be null")
-      }
-
-   } catch (err) {
-      next(err);
+         res.status(201).json({ msg: "Product edited", name: product.name });
+   } catch (error) {
+      next(error);
    }
 }
 
