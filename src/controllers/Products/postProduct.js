@@ -34,7 +34,7 @@ const postProduct =async (req,res,next)=>{
     }
     const newProduct = await Product.create({
         name: normalizeString(name),
-        price, 
+        price:convertToInt(price), 
         img: [...img,...urls],
         description, 
         stock: convertToInt(stock),
@@ -50,9 +50,9 @@ const postProduct =async (req,res,next)=>{
         await newProduct.addCategory(newCategory);
      })
 
-     res.status(201).json({ msg: "Producto creado exitosamente", name: newProduct.name });
+     res.status(201).json({ msg: "Product created", name: newProduct.name });
   } catch (error) {
-      console.log(error)
+      next(error)
   }
 }
 
