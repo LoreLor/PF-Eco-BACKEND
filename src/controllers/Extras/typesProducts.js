@@ -121,7 +121,7 @@ const typesProducts = [
 
     {
         "name": "iPhone SE",
-        "img": ["http://assets.stickpng.com/images/5f49272168ecc70004ae707f.png"],
+        "img": ["https://i.ibb.co/mHWWH5h/5f49272168ecc70004ae707f.png"],
         "price": 127380,
         "description": "En el catálogo de móviles de Apple no solo existe lo más top del momento, también nos encontramos con los iPhone SE. Smartphones que nos ofrecen grandes prestaciones en muchos apartados, pero más reducidas en otros casos. Con esta tercera generación, Apple no ha cambiado demasiado, pero sí que supone una renovación importante.",
         "rating": 2,
