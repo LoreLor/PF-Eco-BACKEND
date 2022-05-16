@@ -26,8 +26,6 @@ const putProduct = async (req, res, next) => {
    // Si alguno de los datos del formulario llega vacío, retorna "Check the fields".
    if (!name || /* !img || */ !price || !description || !stock || !categories) return res.status(400).json({msg:"Check the fields."})
    try {
-      console.log(name)
-      console.log(id)
       const urls = [];
       const files = req.files;
       for(const file of files){
