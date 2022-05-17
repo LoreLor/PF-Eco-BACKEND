@@ -6,6 +6,7 @@ module.exports = function init() {
   const Product = require("./models/Product.js");
   const Detail = require("./models/Detail.js");
   const Cart = require("./models/Cart.js");
+  const Review = require("./models/Review.js")
   ////relaciones////
 
 
@@ -20,6 +21,9 @@ module.exports = function init() {
   
   Cart.hasMany(Detail)
   Detail.belongsTo(Cart)
+
+  // Detail.hasOne(Review)
+  // Review.hasOne(Detail)
 
   User.hasMany(Cart)
   Cart.belongsTo(User)
