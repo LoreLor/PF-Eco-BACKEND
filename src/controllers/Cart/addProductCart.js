@@ -1,6 +1,7 @@
 const Cart = require("../../models/Cart.js");
 const Product = require("../../models/Product.js");
 const User = require("../../models/User.js");
+const Detail = require("../../models/Detail.js");
 
 const addProductCart = async (req, res) => {
   try {
@@ -27,7 +28,7 @@ const addProductCart = async (req, res) => {
     });
 
     //Verificar si el producto ya se encuentra dentro del carrito
-    const productoYaExiste = await User.findOne({
+    const productoYaExisteEnElCarrito = await User.findOne({
       where:{
         id: userId,
       },
@@ -42,9 +43,18 @@ const addProductCart = async (req, res) => {
       }
     });
 
+    const cantidad = await Detail.findOne({
+      where: {
+        productId: productId,
+        
+      },attributes: ["bundle"],
+    });
+      
+    const cant_product = Object.entries(cantidad);
+   
     if (!usuarioTieneCarrito) {
       //Si el usuario no tiene un carrito disponible, creamos uno
-      const nuevoCarrito = await Cart.create({
+      await Cart.create({
         payment_method: null,
         date: null,
         status: null,
@@ -64,7 +74,7 @@ const addProductCart = async (req, res) => {
     } else if (!productoExiste) {
       res.send("El producto no esta a la venta");
 
-    }else if(productoYaExiste.carts < 1 && usuarioTieneCarrito && productoExiste){
+    }else if(productoYaExisteEnElCarrito.carts < 1 && usuarioTieneCarrito && productoExiste){
       const productoAgregado = await Cart.findOne({
         where: {
           userId: userId,
@@ -72,10 +82,29 @@ const addProductCart = async (req, res) => {
       });
 
       await productoExiste.addCart(productoAgregado);
-      res.send("Producto agregado al carrito");
+
+      //Ingresar el nuevo dato a los detalles del carrito
+      const detalleDeLaCompra = await Detail.create({
+        name: productoExiste.name,
+        price: productoExiste.price,
+        bundle: 1,
+        date: new Date(),
+        cartId: productoAgregado.id,
+        productId: productId,
+      });
+
+      res.send(detalleDeLaCompra);
 
     } else {
-      res.send("El producto ya se encuentra en el carrito");
+         await Detail.update({
+        bundle: cant_product[0][1]["bundle"] + 1
+      }, {
+        where: {
+          productId: productId,
+        }, 
+      })   
+
+      res.send("El producto ya se encuentra en el carrito, PERO FUE ACTUALIZADO");
     }
   } catch (err) {
     console.log(err);
@@ -83,33 +112,3 @@ const addProductCart = async (req, res) => {
 };
 
 module.exports = addProductCart;
-
-/* {
-    "name": "alex",
-    "last_name": "correa",
-    "user_name": "luciferAlex",
-    "email": "jaja@hotmail.com",
-    "password": "12345",
-    "dni": 12345,
-    "phone_number": "1100112230",
-    "address": "calle trucha 123",
-    "rol": "user",
-    "birthday": "2022-01-01"
-  } */
-
-  /*
-        const user = await User.findOne({
-        where: {
-          id: userId,
-        },
-        include: {
-          model: Cart,
-          include: {
-            model: Product,
-          },
-        },
-      });
-
-      res.send(user);
-  
-  */

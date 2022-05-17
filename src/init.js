@@ -1,6 +1,4 @@
 module.exports = function init() {
-
-
   const User = require("./models/User.js");
   const Category = require("./models/Category.js");
   const Product = require("./models/Product.js");
@@ -9,18 +7,18 @@ module.exports = function init() {
   const Review = require("./models/Review.js")
   ////relaciones////
 
+  User.belongsToMany(Product, { through: "user_product" });
+  Product.belongsToMany(User, { through: "user_product" });
 
-  User.belongsToMany(Product, { through: "user_product" })
-  Product.belongsToMany(User, { through: "user_product" })
+  Product.belongsToMany(Category, { through: "product_category" });
+  Category.belongsToMany(Product, { through: "product_category" });
 
-  Product.belongsToMany(Category, { through: "product_category" })
-  Category.belongsToMany(Product, { through: "product_category" })
+  Product.hasMany(Detail);
+  Detail.belongsTo(Product);
 
-  Product.hasMany(Detail)
-  Detail.belongsTo(Product)
-  
-  Cart.hasMany(Detail)
-  Detail.belongsTo(Cart)
+
+  Cart.hasMany(Detail);
+  Detail.belongsTo(Cart);
 
   // Detail.hasOne(Review)
   // Review.hasOne(Detail)
@@ -28,7 +26,10 @@ module.exports = function init() {
   User.hasMany(Cart)
   Cart.belongsTo(User)
 
-  Cart.belongsToMany(Product, { through: "cart_product" })
-  Product.belongsToMany(Cart, { through: "cart_product" })
 
-}
+  User.hasMany(Cart);
+  Cart.belongsTo(User);
+
+  Cart.belongsToMany(Product, { through: "cart_product" });
+  Product.belongsToMany(Cart, { through: "cart_product" });
+};

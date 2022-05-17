@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 
 const sequelize = require("../db");
 
-const Detail = sequelize.define("detail", {
+const Detail = sequelize.define("productInCart", {
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
