@@ -15,6 +15,7 @@ const Product = sequelize.define("product", {
   },
   img: {
     type: DataTypes.ARRAY(DataTypes.STRING),
+    defaultValue: "https://archive.ebrschools.org/wp-content/themes/ebr/img/nofound.png",
     allowNull: false
   },
   price: {
