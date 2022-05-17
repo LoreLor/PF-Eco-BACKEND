@@ -9,6 +9,10 @@ const Detail = sequelize.define("detail", {
     primaryKey: true,
     autoIncrement: true,
   },
+  name:{
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   bundle: {
     type: DataTypes.INTEGER,
     defaultValue: 0,
