@@ -4,6 +4,7 @@ module.exports = function init() {
   const Product = require("./models/Product.js");
   const Detail = require("./models/Detail.js");
   const Cart = require("./models/Cart.js");
+  const Review = require("./models/Review.js")
   ////relaciones////
 
   User.belongsToMany(Product, { through: "user_product" });
@@ -15,8 +16,16 @@ module.exports = function init() {
   Product.hasMany(Detail);
   Detail.belongsTo(Product);
 
+
   Cart.hasMany(Detail);
   Detail.belongsTo(Cart);
+
+  // Detail.hasOne(Review)
+  // Review.hasOne(Detail)
+
+  User.hasMany(Cart)
+  Cart.belongsTo(User)
+
 
   User.hasMany(Cart);
   Cart.belongsTo(User);
