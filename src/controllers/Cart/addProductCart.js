@@ -83,15 +83,6 @@ const addProductCart = async (req, res) => {
 
       await productoExiste.addCart(productoAgregado);
 
-      //Se descuenta la unidad comprada al stock general del producto
-      await Product.update({
-        stock: productoExiste.stock - 1,
-      }, {
-        where: {
-          id: productId,
-        },
-      });
-
       //Ingresar el nuevo dato a los detalles del carrito
       const detalleDeLaCompra = await Detail.create({
         name: productoExiste.name,
@@ -105,15 +96,6 @@ const addProductCart = async (req, res) => {
       res.send(detalleDeLaCompra);
 
     } else {
-      //Actualizar el stock del producto
-       await Product.update({
-        stock: productoExiste.stock - 1,
-      }, {
-        where: {
-          id: productId,
-        },
-      }); 
-
          await Detail.update({
         bundle: cant_product[0][1]["bundle"] + 1
       }, {
