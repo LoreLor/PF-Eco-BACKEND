@@ -16,7 +16,6 @@ const sequelize = require("../db");
     },
     date:{
         type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW
     },
     status:{
         type: DataTypes.STRING,

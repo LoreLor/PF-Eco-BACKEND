@@ -19,8 +19,12 @@ const Detail = sequelize.define("detail", {
     allowNull: false,
   },
   price: {
-    type: DataTypes.DOUBLE,
+    type: DataTypes.INTEGER,
     allowNull: false,
+  },
+  price_total:{
+    type: DataTypes.INTEGER,
+    allowNull: true,
   },
   date: {
     type: DataTypes.DATE,

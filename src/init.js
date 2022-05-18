@@ -16,7 +16,6 @@ module.exports = function init() {
   Product.hasMany(Detail);
   Detail.belongsTo(Product);
 
-
   Cart.hasMany(Detail);
   Detail.belongsTo(Cart);
 

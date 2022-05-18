@@ -15,7 +15,7 @@ const test = async(req, res)=> {
             include: {
                 model: Detail,
             }
-        }) 
+        })  
 
         res.send(todo)
 

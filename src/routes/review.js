@@ -12,4 +12,4 @@ router.get("/", getReviews)
 // router.get("/product/:id", getReviewsByProduct)
 
 
-module.exports = router; 
+module.exports = router;  
