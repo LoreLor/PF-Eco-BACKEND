@@ -4,10 +4,10 @@ const Review = require("../../models/Review.js");
 const User = require("../../models/User.js");
 
 const getReviewsOfProduct = async (req, res, next) => {
-    const { id } = req.params;
+    const { productId } = req.query;
     try {
         
-        let review = await Product.findByPk(id , {
+        let review = await Product.findByPk(productId , {
             include: [{
                 model: Detail,
                 include: [{
@@ -16,13 +16,12 @@ const getReviewsOfProduct = async (req, res, next) => {
             }]
         })
 
-        res.status(200).send(review)
-        
-        res.status(200).send("Get reviews of products.")
+
+        res.status(200).send("Reviews: " + review.dataValues.details[0].review)
 
 
     } catch (error) {
-        next(error);
+        next(error)
     }
 }
 
