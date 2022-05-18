@@ -3,7 +3,7 @@ const Product = require("../../models/Product.js");
 const User = require("../../models/User.js");
 const Detail = require("../../models/Detail.js");
 
-const addProductCart = async (req, res) => {
+const addProductCart = async (req, res, next) => {
   try {
     const { userId, productId, required_quantity } = req.query;
 
@@ -91,6 +91,7 @@ const addProductCart = async (req, res) => {
     }
   } catch (err) {
     console.log(err);
+    next(err);
   }
 };
 
