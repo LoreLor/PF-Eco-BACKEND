@@ -16,9 +16,7 @@ const getReviewsOfProduct = async (req, res, next) => {
             }]
         })
 
-
         res.status(200).send("Reviews: " + review.dataValues.details[0].review)
-
 
     } catch (error) {
         next(error)
