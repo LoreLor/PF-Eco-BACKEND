@@ -7,11 +7,16 @@ const getReviewsOfProduct = async (req, res, next) => {
     const { id } = req.params;
     try {
         
-        // let detalle = await Detail.findOne({
-        //     where: {
-        //         productId: id,
-        //     }
-        // })
+        let review = await Product.findByPk(id , {
+            include: [{
+                model: Detail,
+                include: [{
+                    model: Review
+                }]
+            }]
+        })
+
+        res.status(200).send(review)
         
         res.status(200).send("Get reviews of products.")
 
