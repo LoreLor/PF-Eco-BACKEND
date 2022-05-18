@@ -7,7 +7,7 @@ let getReviewsOfProduct = require("../controllers/Review/getReviewsOfProduct")
 
 
 router.get("/", getReviews)
-router.get("/product/:id", getReviewsOfProduct)
+router.get("/product", getReviewsOfProduct)
 
 
 module.exports = router;  
