@@ -5,10 +5,10 @@ const Detail = require("../../models/Detail.js");
 
 const addProductCart = async (req, res) => {
   try {
-    const { userId, productId } = req.query;
+    const { userId, productId, required_quantity } = req.query;
 
-    //Verificamos que el usuario tenga un carrito disponible creado
-    const usuarioTieneCarrito = await User.findOne({
+    //Verifica que el usuario disponga de un carrito disponible
+    const userHasCart = await User.findOne({
       where: {
         id: userId,
       },
@@ -20,40 +20,30 @@ const addProductCart = async (req, res) => {
       },
     });
 
-    //Verificamos que el producto exista
-    const productoExiste = await Product.findOne({
+    //Verifica si el producto existe en la base de datos
+    const producExists = await Product.findOne({
       where: {
         id: productId,
       },
     });
 
-    //Verificar si el producto ya se encuentra dentro del carrito
-    const productoYaExisteEnElCarrito = await User.findOne({
-      where:{
+    //Verificar si el producto ya se encuentra dentro del carrito 
+    const productInCart = await User.findOne({
+      where: {
         id: userId,
       },
       include: {
         model: Cart,
         include: {
           model: Product,
-          where:{
+          where: {
             id: productId,
-          }
-        }
-      }
+          },
+        },
+      },
     });
 
-    const cantidad = await Detail.findOne({
-      where: {
-        productId: productId,
-        
-      },attributes: ["bundle"],
-    });
-      
-    const cant_product = Object.entries(cantidad);
-   
-    if (!usuarioTieneCarrito) {
-      //Si el usuario no tiene un carrito disponible, creamos uno
+    if (!userHasCart) {
       await Cart.create({
         payment_method: null,
         date: null,
@@ -62,49 +52,42 @@ const addProductCart = async (req, res) => {
         userId: userId,
       });
 
-      const productoAgregado = await Cart.findOne({
-        where: {
-          userId: userId,
-        },
-      });
+      const cart = searchCart(userId)
 
-      await productoExiste.addCart(productoAgregado);
+      await producExists.addCart(cart);
       res.send("Producto añadido al carrito");
 
-    } else if (!productoExiste) {
+    } else if (!producExists) {
       res.send("El producto no esta a la venta");
 
-    }else if(productoYaExisteEnElCarrito.carts < 1 && usuarioTieneCarrito && productoExiste){
-      const productoAgregado = await Cart.findOne({
-        where: {
-          userId: userId,
-        },
-      });
+    } else if (productInCart.carts < 1 && userHasCart && producExists) {
+     const cart =  searchCart(userId)
 
-      await productoExiste.addCart(productoAgregado);
+      await producExists.addCart(cart);
 
       //Ingresar el nuevo dato a los detalles del carrito
-      const detalleDeLaCompra = await Detail.create({
-        name: productoExiste.name,
-        price: productoExiste.price,
-        bundle: 1,
+      const purchaseDetails = await Detail.create({
+        name: producExists.name,
+        price: producExists.price,
+        bundle: required_quantity,
         date: new Date(),
         cartId: productoAgregado.id,
         productId: productId,
       });
 
-      res.send(detalleDeLaCompra);
+      res.send(purchaseDetails);
 
     } else {
-         await Detail.update({
-        bundle: cant_product[0][1]["bundle"] + 1
+        await Detail.update({
+        bundle: required_quantity,
+        price_total: producExists.price * required_quantity,
       }, {
         where: {
           productId: productId,
         }, 
-      })   
+      })  
 
-      res.send("El producto ya se encuentra en el carrito, PERO FUE ACTUALIZADO");
+      res.status(200).send(`Producto actualizado, la cnatidad actualizada pasa a ser de: ${required_quantity}`);
     }
   } catch (err) {
     console.log(err);
@@ -112,3 +95,11 @@ const addProductCart = async (req, res) => {
 };
 
 module.exports = addProductCart;
+
+const searchCart = (userId) => {
+  return Cart.findOne({
+    where: {
+      userId: userId,
+    },
+  });
+};
