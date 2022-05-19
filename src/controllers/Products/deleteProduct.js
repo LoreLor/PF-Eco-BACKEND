@@ -1,5 +1,5 @@
 const Product = require("../../models/Product.js");
-
+//Esta se puede borrar
 const deleteProduct = async (req, res, next) => {
     const { id } = req.params;
 

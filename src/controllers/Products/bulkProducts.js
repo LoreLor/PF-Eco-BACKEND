@@ -14,6 +14,7 @@ const bulkProducts = async (req, res, next) => {
                 description: n.description,
                 rating: n.rating,
                 stock: n.stock,
+                isActive: "Active"
         })
         n.categories.forEach(async (item) => {
             const [newCategory, boolCreate] = await Category.findOrCreate({

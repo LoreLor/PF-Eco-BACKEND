@@ -21,8 +21,8 @@ const cloudinaryMethod = async (file) =>{
 const postProduct =async (req,res,next)=>{
     const {input} = req.body
     const formData = JSON.parse(input)
-    const { name, img, price, description, stock, categories } = formData;
-    if (!name || /* !img || */ !price || !description || !stock || !categories) return res.status(400).json({msg:"Check the fields."})
+    const { name, img, price, description, stock, categories,isActive } = formData;
+    if (!name || /* !img || */ !price || !description || !stock || !categories || !isActive) return res.status(400).json({msg:"Check the fields."})
     try {
     const urls = [];
     const files = req.files;
@@ -38,7 +38,8 @@ const postProduct =async (req,res,next)=>{
         img: [...img,...urls],
         description, 
         stock: convertToInt(stock),
-        rating: convertToInt("0")
+        rating: convertToInt("0"),
+        isActive
      });
 
      categories.forEach(async (item) => {
