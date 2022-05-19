@@ -15,7 +15,6 @@ const getReviewsOfProduct = async (req, res, next) => {
                 }]
             }]
         })
-        
 
         if(product) {
             var detalles = product.dataValues.details;
