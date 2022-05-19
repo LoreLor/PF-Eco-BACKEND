@@ -52,26 +52,38 @@ const addProductCart = async (req, res, next) => {
         userId: userId,
       });
 
-      const cart = searchCart(userId)
-
-      await producExists.addCart(cart);
-      res.send("Producto añadido al carrito");
-
-    } else if (!producExists) {
-      res.send("El producto no esta a la venta");
-
-    } else if (productInCart.carts < 1 && userHasCart && producExists) {
-     const cart =  searchCart(userId)
+      const cart = await searchCart(userId)
 
       await producExists.addCart(cart);
 
       //Ingresar el nuevo dato a los detalles del carrito
       const purchaseDetails = await Detail.create({
         name: producExists.name,
+        img: producExists.img[0],
         price: producExists.price,
+        price_total: producExists.price * required_quantity,
         bundle: required_quantity,
         date: new Date(),
-        cartId: productoAgregado.id,
+        cartId: cart.id,
+        productId: productId,
+      });
+
+      res.send(purchaseDetails);
+
+    } else if (productInCart.carts < 1 && userHasCart && producExists) {
+     const cart = await searchCart(userId)
+
+      await producExists.addCart(cart);
+
+      //Ingresar el nuevo dato a los detalles del carrito
+      const purchaseDetails = await Detail.create({
+        name: producExists.name,
+        img: producExists.img[0],
+        price: producExists.price,
+        price_total: producExists.price * required_quantity,
+        bundle: required_quantity,
+        date: new Date(),
+        cartId: cart.id,
         productId: productId,
       });
 
@@ -97,10 +109,16 @@ const addProductCart = async (req, res, next) => {
 
 module.exports = addProductCart;
 
-const searchCart = (userId) => {
-  return Cart.findOne({
-    where: {
-      userId: userId,
-    },
-  });
+const searchCart = async(userId) => {
+  try{
+    const r = await Cart.findOne({
+      where: {
+        userId: userId,
+      },
+    });
+
+    return r;
+  }catch(err){
+    console.log(err)
+  }
 };

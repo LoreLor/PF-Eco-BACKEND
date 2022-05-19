@@ -18,6 +18,10 @@ const Detail = sequelize.define("detail", {
     defaultValue: 0,
     allowNull: false,
   },
+  img:{
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   price: {
     type: DataTypes.INTEGER,
     allowNull: false,
