@@ -22,6 +22,10 @@ const sequelize = require("../db");
         defaultValue: "pending",
         enum: ["pending", "paid", "cancelled"],
     },
+    price_total:{
+        type: DataTypes.DOUBLE,
+        allowNull: false,
+    },
     open:{
         type: DataTypes.BOOLEAN,
         defaultValue: true
