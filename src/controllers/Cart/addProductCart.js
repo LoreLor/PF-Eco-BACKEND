@@ -43,6 +43,7 @@ const addProductCart = async (req, res, next) => {
       },
     });
 
+
     if (!userHasCart) {
       await Cart.create({
         payment_method: null,
@@ -71,6 +72,31 @@ const addProductCart = async (req, res, next) => {
 
       res.send(purchaseDetails);
 
+    } else if (userHasCart) {
+      const cart = await searchCart(userId)
+
+      await producExists.addCart(cart);
+
+      //Ingresar el nuevo dato a los detalles del carrito
+      const purchaseDetails = await Detail.create({
+        name: producExists.name,
+        img: producExists.img[0],
+        price: producExists.price,
+        price_total: producExists.price * required_quantity,
+        bundle: required_quantity,
+        stock: producExists.stock,
+        date: new Date(),
+        cartId: cart.id,
+        productId: productId,
+      });
+
+      res.send(purchaseDetails);
+
+    } else if(!producExists || producExists.stock < 1){
+      res.status(400).json({
+        message: "Producto no disponible",
+      });
+      
     } else if (productInCart.carts < 1 && userHasCart && producExists) {
      const cart = await searchCart(userId)
 
