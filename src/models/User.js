@@ -20,7 +20,7 @@ const User = sequelize.define('user', {
   user_name: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true
+    unique: false
   },
   img: {
     type: DataTypes.TEXT,
@@ -45,10 +45,13 @@ const User = sequelize.define('user', {
   },
   address: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   rol: {
-    type: DataTypes.ENUM("Admin", "User"),
+    type: DataTypes.STRING,
+    enum: ['admin', 'user'],
+    defaultValue: 'user',
+    allowNull: true,
     //sin rol es invitado
   },
   birthday: {
@@ -56,7 +59,8 @@ const User = sequelize.define('user', {
     allowNull: true,
   },
   isActive: {
-    type: DataTypes.ENUM("Active", "Inactive"),
+    type: DataTypes.BOOLEAN,
+    defaultValue: true,
   },
 });
 

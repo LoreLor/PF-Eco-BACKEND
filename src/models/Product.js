@@ -34,8 +34,8 @@ const Product = sequelize.define("product", {
     allowNull: false,
   },
   isActive: {
-    type: DataTypes.ENUM("Active", "Inactive"),
-    allowNull: false,
+    type: DataTypes.BOOLEAN,
+    allowNull: true,
   }
 });
 
