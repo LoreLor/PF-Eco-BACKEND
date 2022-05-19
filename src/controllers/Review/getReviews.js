@@ -6,7 +6,11 @@ const getReviews = async (req, res, next) => {
             {
                 attributes: ["title", "points", "description"]
             });
-        res.status(200).send(allReviews);
+        if(allReviews.length) {
+            return res.status(200).send(allReviews);
+        } else {
+            return res.status(400).send("There are no reviews.")
+        }
     } catch (error) {
         next(error);
     }
