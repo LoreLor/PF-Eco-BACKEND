@@ -1,23 +1,19 @@
 const Cart = require("../../models/Cart.js");
+const Detail = require("../../models/Detail.js");
 
 const getProductsCart = async(req, res)=>{
     try{
-        let result = await Cart.findAll()
-        if(result.length > 0){
-            res.json({
-                status: "success",
-                data: result
-            })
-        }else{
-            res.json({
-                status: "error",
-                message: "No hay productos en el carrito"
-            })
-        }
+        const {id} = req.params;
 
+        const summaryDetail = await Cart.findOne({
+            where:{ userId: id, },
+            include: { model: Detail }
+        });  
+
+        res.status(200).send(summaryDetail)
     }catch(err){
         console.log(err)
     }
-}
+};
 
 module.exports = getProductsCart;
