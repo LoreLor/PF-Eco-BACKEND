@@ -9,6 +9,9 @@ const sequelize = require("../db");
       allowNull: false,
       primaryKey: true
     },
+    autor: {
+      type: DataTypes.STRING,
+    },
     title: {
       type: DataTypes.STRING,
       allowNull: false,

@@ -1,6 +1,8 @@
+const Cart = require("../../models/Cart.js");
 const Detail = require("../../models/Detail.js");
 const Product = require("../../models/Product.js");
 const Review = require("../../models/Review.js");
+const User = require("../../models/User.js");
 
 const postReview = async (req, res, next) => {
     const { detailId } = req.query;
@@ -10,14 +12,23 @@ const postReview = async (req, res, next) => {
         let detail = await Detail.findByPk(detailId, {
             include: [{
                 model: Review,
+            }],
+            include: [{
+                model: Cart,
             }]
         })
+
+        
+        
         if (detail) {
+            let findCart = await Cart.findByPk(detail.dataValues.cartId);
+            let findUser = await User.findByPk(findCart.dataValues.userId)
 
             if (title && points >= 0 && points <= 5 && description) {
                 if(!detail.dataValues.review) {
 
                     let newReview = await Review.create({
+                        autor: findUser.dataValues.user_name,
                         title,
                         points,
                         description
