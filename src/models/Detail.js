@@ -30,6 +30,9 @@ const Detail = sequelize.define("detail", {
     type: DataTypes.INTEGER,
     allowNull: true,
   },
+  stock:{
+    type: DataTypes.INTEGER,
+  },
   date: {
     type: DataTypes.DATE,
     allowNull: false,
