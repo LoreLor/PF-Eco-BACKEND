@@ -3,19 +3,18 @@ var router = express.Router();
 
 let test = require("../controllers/Cart/test.js")
 
-let getProducts = require("../controllers/Cart/getProducts")
-//let getProductsCart = require("../controllers/Cart/getProductsCart")
+let getProductsCart = require("../controllers/Cart/getProductsCart")
 let addProductCart = require("../controllers/Cart/addProductCart")
-// let putProduct = require("../controllers/Cart/putProductCart")
 let deleteProduct = require("../controllers/Cart/deleteProductCart")
+// let putProduct = require("../controllers/Cart/putProductCart")
+//let getProducts = require("../controllers/Cart/getProducts")
 
-router.get("/test", test)
 
+router.get("/:id", getProductsCart)
 router.post("/", addProductCart)
 router.delete("/", deleteProduct)
-//router.get("/", getProducts)
 
-//router.get("/products-cart", getProductsCart)
+//router.get("/", getProducts)
 // router.put("/products-cart/:productId", putProduct)
 
 module.exports = router; 
