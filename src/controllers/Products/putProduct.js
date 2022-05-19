@@ -22,9 +22,9 @@ const putProduct = async (req, res, next) => {
    const { id } = req.params;
    const {input} = req.body
    const formData = JSON.parse(input)
-   const { name, img, price, description, stock, rating, categories } = formData;
+   const { name, img, price, description, stock,categories,isActive } = formData;
    // Si alguno de los datos del formulario llega vacío, retorna "Check the fields".
-   if (!name || /* !img || */ !price || !description || !stock || !categories) return res.status(400).json({msg:"Check the fields."})
+   if (!name || /* !img || */ !price || !description || !stock || !categories || !isActive) return res.status(400).json({msg:"Check the fields."})
    try {
       const urls = [];
       const files = req.files;
@@ -42,6 +42,7 @@ const putProduct = async (req, res, next) => {
             img: [...img,...urls],
             description: description,
             stock: convertToInt(stock),
+            isActive,
          }, {
             where: {
                id,

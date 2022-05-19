@@ -48,12 +48,15 @@ const User = sequelize.define('user', {
     allowNull: false,
   },
   rol: {
-    type: DataTypes.ENUM("admin", "user"),
+    type: DataTypes.ENUM("Admin", "User"),
     //sin rol es invitado
   },
   birthday: {
     type: DataTypes.DATE,
     allowNull: true,
+  },
+  isActive: {
+    type: DataTypes.ENUM("Active", "Inactive"),
   },
 });
 

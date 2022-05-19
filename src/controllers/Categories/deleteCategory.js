@@ -15,15 +15,14 @@ const deleteCategory = async (req, res, next) => {
         })
         
         if(category.dataValues.products.length > 0) {
-            res.status(400).send(`La categoría tiene ${category.dataValues.products.length} productos asignados, no es posible eliminarla.
-            Por favor, elimine los productos pertenecientes a la categoria.`)
+            res.status(200).json({msg:`Imposible to delete`})
         } else {
-            let eliminadas = await Category.destroy({
+            let deleted = await Category.destroy({
                 where: {
                     id
                 }
             });
-            res.status(200).send(`Se eliminó ${eliminadas} categoría.`)
+            res.status(200).json({msg:`Category deleted`})
         }
 
 
