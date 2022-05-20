@@ -15,8 +15,8 @@ const Detail = sequelize.define("detail", {
   },
   bundle: {
     type: DataTypes.INTEGER,
-    defaultValue: 0,
-    allowNull: false,
+    defaultValue: 1,
+    allowNull: true,
   },
   img:{
     type: DataTypes.STRING,

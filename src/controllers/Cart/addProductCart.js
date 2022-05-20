@@ -5,7 +5,7 @@ const Detail = require("../../models/Detail.js");
 
 const addProductCart = async (req, res, next) => {
   try {
-    const { userId, productId, required_quantity } = req.query;
+    const { userId, productId, updated_quantity } = req.query;
 
     //Verifica que el usuario disponga de un carrito disponible
     const userHasCart = await User.findOne({
@@ -27,13 +27,13 @@ const addProductCart = async (req, res, next) => {
       },
     });
 
-    //Verificar si el producto ya se encuentra dentro del carrito 
-    const productInCart = await User.findOne({
+    //Verificar si el producto ya se encuentra dentro del carrito
+    const productInCart = await Cart.findOne({
       where: {
-        id: userId,
+        userId: userId,
       },
       include: {
-        model: Cart,
+        model: Detail,
         include: {
           model: Product,
           where: {
@@ -43,6 +43,9 @@ const addProductCart = async (req, res, next) => {
       },
     });
 
+    //console.log(productInCart.details[0]["bundle"]);
+
+    //////////
 
     if (!userHasCart) {
       await Cart.create({
@@ -53,7 +56,7 @@ const addProductCart = async (req, res, next) => {
         userId: userId,
       });
 
-      const cart = await searchCart(userId)
+      const cart = await searchCart(userId);
 
       await producExists.addCart(cart);
 
@@ -62,8 +65,8 @@ const addProductCart = async (req, res, next) => {
         name: producExists.name,
         img: producExists.img[0],
         price: producExists.price,
-        price_total: producExists.price * required_quantity,
-        bundle: required_quantity,
+        price_total: producExists.price * 1,
+        bundle: 1,
         stock: producExists.stock,
         date: new Date(),
         cartId: cart.id,
@@ -71,34 +74,49 @@ const addProductCart = async (req, res, next) => {
       });
 
       res.send(purchaseDetails);
-
-    } else if (userHasCart) {
-      const cart = await searchCart(userId)
-
-      await producExists.addCart(cart);
-
-      //Ingresar el nuevo dato a los detalles del carrito
-      const purchaseDetails = await Detail.create({
-        name: producExists.name,
-        img: producExists.img[0],
-        price: producExists.price,
-        price_total: producExists.price * required_quantity,
-        bundle: required_quantity,
-        stock: producExists.stock,
-        date: new Date(),
-        cartId: cart.id,
-        productId: productId,
-      });
-
-      res.send(purchaseDetails);
-
-    } else if(!producExists || producExists.stock < 1){
+    } else if (!producExists || producExists.stock < 1) {
       res.status(400).json({
         message: "Producto no disponible",
       });
-      
-    } else if (productInCart.carts < 1 && userHasCart && producExists) {
-     const cart = await searchCart(userId)
+    }
+
+    if (productInCart && updated_quantity === "sum") {
+      await Detail.update(
+        {
+          bundle: productInCart.details[0]["bundle"] + 1,
+          price_total: producExists.price * productInCart.details[0]["bundle"],
+        },
+        {
+          where: {
+            productId: productId,
+          },
+        }
+      );
+
+      res.status(200).send(
+          `Producto actualizado, la cnatidad actualizada pasa a ser de: ${1}`
+        );
+
+    }else if(productInCart && updated_quantity === "rest" && productInCart.details[0]["bundle"] <= 1 ){
+      res.send("No se puede restar mas de uno");
+    }else if (productInCart && updated_quantity === "rest") {
+      await Detail.update({
+          bundle: productInCart.details[0]["bundle"] - 1,
+          price_total: producExists.price * productInCart.details[0]["bundle"],
+        },
+        {
+          where: {
+            productId: productId,
+          },
+        }
+      );
+
+      res.status(200).send(
+          `Producto actualizado, la cnatidad actualizada pasa a ser de: ${1}`
+        );
+
+    } else if (userHasCart && producExists) {
+      const cart = await searchCart(userId);
 
       await producExists.addCart(cart);
 
@@ -107,8 +125,8 @@ const addProductCart = async (req, res, next) => {
         name: producExists.name,
         img: producExists.img[0],
         price: producExists.price,
-        price_total: producExists.price * required_quantity,
-        bundle: required_quantity,
+        price_total: producExists.price * 1,
+        bundle: 1,
         stock: producExists.stock,
         date: new Date(),
         cartId: cart.id,
@@ -116,18 +134,6 @@ const addProductCart = async (req, res, next) => {
       });
 
       res.send(purchaseDetails);
-
-    } else {
-        await Detail.update({
-        bundle: required_quantity,
-        price_total: producExists.price * required_quantity,
-      }, {
-        where: {
-          productId: productId,
-        }, 
-      })  
-
-      res.status(200).send(`Producto actualizado, la cnatidad actualizada pasa a ser de: ${required_quantity}`);
     }
   } catch (err) {
     console.log(err);
@@ -137,8 +143,8 @@ const addProductCart = async (req, res, next) => {
 
 module.exports = addProductCart;
 
-const searchCart = async(userId) => {
-  try{
+const searchCart = async (userId) => {
+  try {
     const r = await Cart.findOne({
       where: {
         userId: userId,
@@ -146,7 +152,32 @@ const searchCart = async(userId) => {
     });
 
     return r;
-  }catch(err){
-    console.log(err)
+  } catch (err) {
+    console.log(err);
   }
 };
+
+/*
+else if (userHasCart) {
+      const cart = await searchCart(userId)
+
+      await producExists.addCart(cart);
+
+      //Ingresar el nuevo dato a los detalles del carrito
+      const purchaseDetails = await Detail.create({
+        name: producExists.name,
+        img: producExists.img[0],
+        price: producExists.price,
+        price_total: producExists.price * 1,
+        bundle: 1,
+        stock: producExists.stock,
+        date: new Date(),
+        cartId: cart.id,
+        productId: productId,
+      });
+
+      res.send(purchaseDetails);
+
+    }
+
+*/
