@@ -5,28 +5,26 @@ const normalizeString = require('../../utils/normalizeString.js');
 
 
 const postUser = async (req, res, next) => {
-    const { name, last_name, user_name, email, phone_number, password, dni, address, rol, birthday,isActive } = req.body;
-    if (!name && !last_name && !user_name && !email && !password && !address && !isActive ) {
+    const { name, last_name, user_name, email, phone_number, password, dni, address, birthday} = req.body;
+    if (!name && !last_name && !user_name && !email && !password && !address) {
         res.status(400).json({ msg: "Faltan datos" });
     }
     try {
         const userNew = new User({
             name: normalizeString(name),
             last_name: normalizeString(last_name),
-            user_name: normalizeString(user_name),
+            user_name,
             email: email,
             password: bcrypt.hashSync(password, 8),
             dni: dni,
             phone_number: phone_number,
             address: address,
-            rol: rol,
             birthday: birthday,
-            isActive,
         })
         const user = await userNew.save()
         return res.status(200).send({
-            name: normalizeString(user.name),
-            last_name: normalizeString(user.last_name),
+            name:user.name,
+            last_name:user.last_name,
             user_name: user.user_name,
             email: user.email,
             token: generateToken(user),
@@ -37,7 +35,6 @@ const postUser = async (req, res, next) => {
             birthday: user.birthday,
             isActive: user.isActive
         });
-
     } catch (error) {
         next(error);
     }

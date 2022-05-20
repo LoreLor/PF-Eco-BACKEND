@@ -1,6 +1,6 @@
 const Category = require("../../models/Category.js");
 
-const normalizeString = require("../../utils/normalizeString.js");
+//const normalizeString = require("../../utils/normalizeString.js");
 
 const postCategory = async (req, res, next) => {
   const { name } = req.body;
@@ -12,7 +12,7 @@ const postCategory = async (req, res, next) => {
   try {
     const existCategory = await Category.findOne({
       where: {
-        name: normalizeString(name),
+        name
       },
     });
 
@@ -22,7 +22,7 @@ const postCategory = async (req, res, next) => {
       });
     } else {
       let newCategory = await Category.create({
-        name: normalizeString(name),
+        name
       });
 
       res.status(201).json({

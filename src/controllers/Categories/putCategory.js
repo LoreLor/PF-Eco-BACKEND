@@ -18,7 +18,7 @@ const putCategory = async (req, res, next) => {
             msg: "Category updated",
             name: updateCategory.name,});
         } else {
-            res.status(400).send("Categoria no encontrada.")
+            res.status(400).send("Category not found")
         }
 
     } catch (err) {

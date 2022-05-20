@@ -2,8 +2,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const multer = require('multer');
-const uuid = require('uuid')
 
 //require('./db.js');
 const dotenv = require("dotenv")
@@ -28,29 +26,6 @@ app.use((req,res,next)=>{
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   next();
 })
-
-/* const storage = multer.diskStorage({
-   destination:(req,file,cb)=>{path.join(__dirname,'./public/uploads')},
-   filename: (req,file,cb)=>{
-      cb(null, uuid.v4() + path.extname(file.originalname))
-   }
-
-}) */
-
-/* app.use(multer({
-  storage,
-  dest  : path.join(__dirname,'public/uploads'),
-  limits: {fileSize:3000000},
-  fileFilter:(req,file,cb)=>{
-    const filetypes= /jpg|jpeg|png/
-    const mimetype = filetypes.test(file.mimetype)
-    const extname = filetypes.test(path.extname(file.originalname))
-    if(mimetype && extname){
-      return cb(null,true)
-    }
-    cb("El archivo debe ser una imagen")
-  }
-}).single('file')) */
 
 app.use('/', indexRouter);
 

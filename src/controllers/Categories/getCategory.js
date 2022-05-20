@@ -1,14 +1,14 @@
 const Category = require("../../models/Category.js");
 const Product = require("../../models/Product.js");
 
-const normalizeString = require("../../utils/normalizeString.js");
+//const normalizeString = require("../../utils/normalizeString.js");
 
 const getCategory = async (req, res, next) => {
     try {
 
         const searchCategory = await Category.findOne({
             where: {
-                name: normalizeString(req.params.name),
+                name: req.params.name,
             }
         })
 
@@ -19,7 +19,7 @@ const getCategory = async (req, res, next) => {
         } else {
             const categoryProducts = await Category.findOne({
                 where: {
-                    name: normalizeString(req.params.name),
+                    name: req.params.name,
                 },
                 include: [{
                     model: Product,
