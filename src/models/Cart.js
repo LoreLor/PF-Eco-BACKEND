@@ -24,7 +24,7 @@ const sequelize = require("../db");
     },
     price_total:{
         type: DataTypes.DOUBLE,
-        allowNull: false,
+        allowNull: true,
     },
     open:{
         type: DataTypes.BOOLEAN,

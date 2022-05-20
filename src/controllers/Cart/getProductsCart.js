@@ -7,7 +7,10 @@ const getProductsCart = async(req, res)=>{
 
         const summaryDetail = await Cart.findOne({
             where:{ userId: id, },
-            include: { model: Detail }
+            include: { 
+                model: Detail,
+                
+             }
         });  
 
         res.status(200).send(summaryDetail)
