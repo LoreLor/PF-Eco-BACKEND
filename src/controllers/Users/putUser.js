@@ -1,6 +1,6 @@
 const User = require("../../models/User.js");
 
-const normalizeString = require('../../utils/normalizeString.js');
+//const normalizeString = require('../../utils/normalizeString.js');
 
 const putUser = async (req, res, next) => {
     try {
@@ -9,7 +9,7 @@ const putUser = async (req, res, next) => {
         const { name, email, password, role, dni, phone_number, address, birthday } = req.body;
 
         await User.update({
-            name: normalizeString(name),
+            name,
             email,
             password,
             role,

@@ -4,7 +4,6 @@ const fs = require('fs')
 const Product = require("../../models/Product.js");
 const Category = require("../../models/Category.js");
 
-const normalizeString = require('../../utils/normalizeString.js');
 const convertToInt = require("../../utils/convertToInt.js");
 
 const cloudinaryMethod = async (file) =>{
@@ -37,7 +36,7 @@ const putProduct = async (req, res, next) => {
       
          // Actualizo el producto con los datos que llegan del formulario.
          let productEdited = await Product.update({
-            name: normalizeString(name),
+            name: name,
             price:convertToInt(price),
             img: [...img,...urls],
             description: description,

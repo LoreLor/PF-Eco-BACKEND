@@ -3,7 +3,7 @@ const User = require("../../models/User.js");
 const statusUser = async (req, res, next) => {
     const { id } = req.params;
     const { isActive, rol } = req.body;
-    if(!isActive || !rol){res.status(400).json({msg:"Missing data"})}
+    if(!isActive || !rol){return res.status(400).json({msg:"Missing data"})}
     try {
         await User.update({
             isActive,
