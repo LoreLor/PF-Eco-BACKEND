@@ -6,7 +6,7 @@ const getProductsCart = async(req, res)=>{
         const {id} = req.params;
 
         const summaryDetail = await Cart.findOne({
-            where:{ userId: id, },
+            where:{ userId: id, open: true },
             include: { 
                 model: Detail,
                 

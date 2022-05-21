@@ -8,7 +8,7 @@ const deleteProduct = async (req, res, next) => {
     const { userId, productId } = req.query;
 
     const productInCart = await Cart.findOne({
-      where: { userId: userId },
+      where: { userId: userId, open: true },
       include: { model: Detail },
     });
 
