@@ -51,7 +51,7 @@ const User = sequelize.define('user', {
     type: DataTypes.STRING,
     enum: ['admin', 'user'],
     defaultValue: 'user',
-    allowNull: true,
+    allowNull: false,
     //sin rol es invitado
   },
   birthday: {
@@ -61,6 +61,7 @@ const User = sequelize.define('user', {
   isActive: {
     type: DataTypes.BOOLEAN,
     defaultValue: true,
+    allowNull: false,
   },
 });
 
