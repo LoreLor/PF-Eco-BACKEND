@@ -31,6 +31,7 @@ const addProductCart = async (req, res, next) => {
     const productInCart = await Cart.findOne({
       where: {
         userId: userId,
+        open: true,
       },
       include: {
         model: Detail,
@@ -52,7 +53,7 @@ const addProductCart = async (req, res, next) => {
         payment_method: null,
         date: null,
         status: null,
-        oppen: true,
+        open: true,
         userId: userId,
         price_total: 1
       });
@@ -150,6 +151,7 @@ const searchCart = async (userId) => {
     const r = await Cart.findOne({
       where: {
         userId: userId,
+        open: true,
       },
     });
 
