@@ -85,7 +85,7 @@ const addProductCart = async (req, res, next) => {
       await Detail.update(
         {
           bundle: productInCart.details[0]["bundle"] + 1,
-          price_total: producExists.price * productInCart.details[0]["bundle"],
+          price_total: producExists.price * (productInCart.details[0]["bundle"] + 1),
         },
         {
           where: {
@@ -100,10 +100,11 @@ const addProductCart = async (req, res, next) => {
 
     }else if(productInCart && updated_quantity === "rest" && productInCart.details[0]["bundle"] <= 1 ){
       res.send("No se puede restar mas de uno");
+      
     }else if (productInCart && updated_quantity === "rest") {
       await Detail.update({
           bundle: productInCart.details[0]["bundle"] - 1,
-          price_total: producExists.price * productInCart.details[0]["bundle"],
+          price_total: producExists.price * (productInCart.details[0]["bundle"] - 1),
         },
         {
           where: {
@@ -126,7 +127,7 @@ const addProductCart = async (req, res, next) => {
         name: producExists.name,
         img: producExists.img[0],
         price: producExists.price,
-        price_total: producExists.price * 1,
+        price_total: producExists.price,
         bundle: 1,
         stock: producExists.stock,
         date: new Date(),
@@ -158,27 +159,4 @@ const searchCart = async (userId) => {
   }
 };
 
-/*
-else if (userHasCart) {
-      const cart = await searchCart(userId)
 
-      await producExists.addCart(cart);
-
-      //Ingresar el nuevo dato a los detalles del carrito
-      const purchaseDetails = await Detail.create({
-        name: producExists.name,
-        img: producExists.img[0],
-        price: producExists.price,
-        price_total: producExists.price * 1,
-        bundle: 1,
-        stock: producExists.stock,
-        date: new Date(),
-        cartId: cart.id,
-        productId: productId,
-      });
-
-      res.send(purchaseDetails);
-
-    }
-
-*/
