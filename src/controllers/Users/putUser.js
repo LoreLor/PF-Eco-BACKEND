@@ -24,15 +24,15 @@ const putUser = async (req, res, next) => {
         });
 
         res.status(200).json({
-            id,
-            name,
-            email,
-            password,
-            role,
-            dni,
-            phone_number,
-            address,
-            birthday
+            id: updateUser.id,
+            name: updateUser.name,
+            email: updateUser.email,
+            password: updateUser.password,
+            role: updateUser.role,
+            dni: updateUser.dni,
+            phone_number: updateUser.phone_number,
+            address: updateUser.address,
+            birthday: updateUser.birthday
         });
 
     } catch (err) {
