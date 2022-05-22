@@ -23,7 +23,17 @@ const putUser = async (req, res, next) => {
             }
         });
 
-        res.status(200).send(updateUser);
+        res.status(200).json({
+            id,
+            name,
+            email,
+            password,
+            role,
+            dni,
+            phone_number,
+            address,
+            birthday
+        });
 
     } catch (err) {
         next(err)
