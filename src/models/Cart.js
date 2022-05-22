@@ -10,9 +10,8 @@ const sequelize = require("../db");
       primaryKey: true
     },
     payment_method:{
-        type: DataTypes.STRING,
-        enum: ["cash", "credit", "debit"],
-        defaultValue: "cash"
+        type: DataTypes.STRING,  
+        defaultValue: "paypal"
     },
     date:{
         type: DataTypes.DATE,

@@ -13,8 +13,12 @@ const userSignin = async (req, res, next) => {
         if (bcrypt.compareSync(password, user.password)) {
             res.send({
                 id: user.id,
+                name: user.name,
+                last_name: user.last_name,
                 user_name: user.user_name,
                 email: user.email,
+                address: user.address,
+                phone_number: user.phone_number,
                 rol: user.rol,
                 token: generateToken(user)
             });
