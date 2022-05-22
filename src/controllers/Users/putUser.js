@@ -8,7 +8,7 @@ const putUser = async (req, res, next) => {
         const { id } = req.params;
         const { name, email, password, role, dni, phone_number, address, birthday } = req.body;
 
-        await User.update({
+       const updateUser = await User.update({
             name,
             email,
             password,
@@ -22,8 +22,10 @@ const putUser = async (req, res, next) => {
                 id
             }
         });
+        
         res.status(200).json({
-            message: "Usuario actualizado correctamente"
+            message: "Usuario actualizado correctamente",
+            updateUser
         })
 
     } catch (err) {
