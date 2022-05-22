@@ -22,11 +22,8 @@ const putUser = async (req, res, next) => {
                 id
             }
         });
-        
-        res.status(200).json({
-            message: "Usuario actualizado correctamente",
-            updateUser
-        })
+
+        res.status(200).send(updateUser);
 
     } catch (err) {
         next(err)
