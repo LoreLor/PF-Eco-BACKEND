@@ -37,7 +37,6 @@ async function getCarrito(userId) {
     return carrito;
   } else {
     const new_carrito = await Cart.create({
-      payment_method: null,
       date: null,
       status: null,
       open: true,
