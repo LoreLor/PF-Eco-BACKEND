@@ -17,15 +17,21 @@ const postReview = async (req, res, next) => {
                 model: Cart,
             }]
         })
+        
+        const allReviews = await Review.findAll(
+            {where: {
+                detailId,
+            }},
+            {
+                attributes: ["id", "title", "points", "description", "detailId"]
+            });
 
-        
-        
         if (detail) {
             let findCart = await Cart.findByPk(detail.dataValues.cartId);
             let findUser = await User.findByPk(findCart.dataValues.userId)
 
             if (title && points >= 0 && points <= 5 && description) {
-                if(!detail.dataValues.review) {
+                if(allReviews.length === 0) {
 
                     let newReview = await Review.create({
                         autor: findUser.dataValues.user_name,
@@ -39,7 +45,7 @@ const postReview = async (req, res, next) => {
                     
                     return res.status(200).send("Review added successfully.");
                 } else {
-                    return res.status(200).send("You have already added a review to this product.")
+                    return res.status(400).send("You have already added a review to this product.")
                 }
             } else {
                 if (!title) return res.status(400).send("Title cannot be null.");
