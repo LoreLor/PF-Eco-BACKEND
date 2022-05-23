@@ -1,7 +1,12 @@
 const typesProducts = [
     {
         "name": "Samsung Galaxy S22 Ultra",
-        "img": ["https://images.samsung.com/is/image/samsung/p6pim/ar/2202/gallery/ar-galaxy-s22-ultra-s908-sm-s908ezgmaro-530923136"],
+        "img": [
+            "https://images.samsung.com/is/image/samsung/p6pim/ar/2202/gallery/ar-galaxy-s22-ultra-s908-sm-s908ezgmaro-530923136",
+            "https://images.samsung.com/es/smartphones/galaxy-s22-ultra/images/galaxy-s22-ultra_highlights_kv_img.jpg",
+            "https://i.blogs.es/6f335c/1366_2000/840_560.jpeg"
+    
+    ],
         "price": 219000,
         "description": "Con la mejor cámara, rendimiento y conectividad en un smartphone Galaxy, el Galaxy S22 Ultra reinventa la experiencia móvil al fusionar las funciones favoritas de los fanáticos de las series Note y S.",
         "rating": 0,
@@ -11,7 +16,11 @@ const typesProducts = [
     
     {
         "name": "Samsung Galaxy M23 5G",
-        "img": ["https://images.samsung.com/is/image/samsung/p6pim/es/sm-m236bzggeub/gallery/es-galaxy-m23-5g-sm-m236-sm-m236bzggeub-531473026?$2160_1728_PNG$"],
+        "img": [
+            "https://images.samsung.com/is/image/samsung/p6pim/es/sm-m236bzggeub/gallery/es-galaxy-m23-5g-sm-m236-sm-m236bzggeub-531473026?$2160_1728_PNG$",
+            "https://i.blogs.es/194910/galaxy_m23_5g/450_1000.jpg",
+            "https://images.samsung.com/is/image/samsung/p6pim/es/sm-m236blbgeub/gallery/es-galaxy-m23-5g-sm-m236-sm-m236blbgeub-531472996?$720_576_PNG$"
+        ],
         "price": 57200,
         "description": "El Samsung Galaxy M23 5G es uno de los móviles de la firma coreana que presumen de características puntualmente destacadas, a pesar de estar catalogado como un teléfono de gama media.",
         "rating": 0,
@@ -21,7 +30,11 @@ const typesProducts = [
 
     {
         "name": "Samsung Galaxy A53 5G",
-        "img": ["https://images.samsung.com/is/image/samsung/p6pim/ar/2202/gallery/ar-galaxy-a53-5g-a536-sm-a536ezkaaro-531544682?$2160_1728_PNG$"],
+        "img": [
+            "https://images.samsung.com/is/image/samsung/p6pim/ar/2202/gallery/ar-galaxy-a53-5g-a536-sm-a536ezkaaro-531544682?$2160_1728_PNG$",
+            "https://www.elgrupoinformatico.com/static/Noticias/2022/04/review-galaxy-a53-5g-1200x675.jpg",
+            "https://s1.eestatic.com/2022/01/20/elandroidelibre/moviles-android/643945922_221241331_1024x576.jpg"
+        ],
         "price": 79640,
         "description": "Uno de los smartphones más importantes en el catálogo de Samsung es el Galaxy A53 5G, que nos ofrece un año más una gran oportunidad de tener tecnología de alto nivel, sin tener que pagar demasiado.",
         "rating": 0,
@@ -31,7 +44,11 @@ const typesProducts = [
 
     {
         "name": "Samsung Galaxy A13",
-        "img": ["https://images.samsung.com/is/image/samsung/p6pim/ar/sm-a135mzkkaro/gallery/ar-galaxy-a13-sm-a135-sm-a135mzkkaro-532207027?$650_519_PNG$"],
+        "img": [
+            "https://images.samsung.com/is/image/samsung/p6pim/ar/sm-a135mzkkaro/gallery/ar-galaxy-a13-sm-a135-sm-a135mzkkaro-532207027?$650_519_PNG$",
+            "https://images.samsung.com/is/image/samsung/p6pim/ar/sm-a135mzwearo/gallery/ar-galaxy-a13-sm-a135-sm-a135mzwearo-532207067?$720_576_PNG$",
+            "https://fotografias.lasexta.com/clipping/cmsimages02/2022/03/04/4E7C9763-F5FD-49B5-A1BE-A0FC7F1AE1F9/98.jpg?crop=1300,731,x0,y19&width=1900&height=1069&optimize=high&format=webply"
+        ],
         "price": 44220,
         "description": "Un smartphone de relación calidad precio que no pasa por alto ningún elemento. Todo ello unido al buen software, nos asegura tener teléfono móvil para varios años.",
         "rating": 0,
@@ -41,7 +58,11 @@ const typesProducts = [
 
     {
         "name": "Samsung Galaxy S21 FE 5G",
-        "img": ["https://samsungar.vtexassets.com/arquivos/ids/177914/Samsung-97798753-ar-galaxy-s21-fe-g990-sm-g990elgaarm-530627001Download-Source.png?v=637788851897970000"],
+        "img": [
+            "https://samsungar.vtexassets.com/arquivos/ids/177914/Samsung-97798753-ar-galaxy-s21-fe-g990-sm-g990elgaarm-530627001Download-Source.png?v=637788851897970000",
+            "https://cdn.pocket-lint.com/r/s/970x/assets/images/159604-phones-review-hands-on-samsung-galaxy-s21-fe-5g-image1-bw6avigsg5.JPG",
+            "https://i.blogs.es/9f38ab/img_9492/450_1000.jpg"
+        ],
         "price": 182380,
         "description": "Un dispositivo confiable que, lo que hace, lo hace muy bien. La firma de tecnología es una experta teniendo terminales bonitos y eficientes y esto es una clara muestra de ello.",
         "rating": 0,
@@ -51,7 +72,11 @@ const typesProducts = [
 
     {
         "name": "Samsung Galaxy F41",
-        "img": ["https://images.samsung.com/is/image/samsung/in-galaxy-f41-f415fz-6gb-sm-f415fzkgins-sm-f---fzkdins-314816837?scl=1&fmt=png-alpha"],
+        "img": [
+            "https://images.samsung.com/is/image/samsung/in-galaxy-f41-f415fz-6gb-sm-f415fzkgins-sm-f---fzkdins-314816837?scl=1&fmt=png-alpha",
+            "https://x-tecno.com/wp-content/uploads/2020/11/Consejos-trucos-y-funciones-ocultas-del-Samsung-Galaxy-F41-que.jpg",
+            "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2020/10/Samsung-Galaxy-F41-review-pros-cons.jpg"
+        ],
         "price": 44000,
         "description": "El smartphone luce una pantalla SuperAMOLED, una triple cámara con sensor de 64 MP y una precio que hace temblar a la competencia.",
         "rating": 0,
@@ -61,7 +86,11 @@ const typesProducts = [
 
     {
         "name": "Samsung Galaxy A22 5G",
-        "img": ["https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_86131061/fee_786_587_png"],
+        "img": [
+            "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_86131061/fee_786_587_png",
+            "https://www.muycomputer.com/wp-content/uploads/2021/06/Galaxy-A22-5G-y-Galaxy-A22-portada.jpg",
+            "https://i.blogs.es/cd7a8c/galaxy_a22_5g-1/840_560.jpg"
+        ],
         "price": 219000,
         "description": "Un modelo que tiene la ventaja de conectarse a las redes móviles de mayor velocidad sin tener que gastarnos todos nuestros ahorros.",
         "rating": 0,
@@ -71,7 +100,11 @@ const typesProducts = [
 
     {
         "name": "Samsung Galaxy F52 5G",
-        "img": ["https://i.ibb.co/B6Lg1cz/1-copia.png"],
+        "img": [
+            "https://i.ibb.co/B6Lg1cz/1-copia.png",
+            "https://consumeglobal.com/wp-content/uploads/2021/05/580203792_184791437_1024x576.jpg",
+            "https://carlosvassan.com/wp-content/uploads/2021/05/gsmarena_001-768x1024.jpg"
+        ],
         "price": 55000,
         "description": "La firma coreana sigue completando su catálogo de gama media con un modelo que, de momento, solo se podrá comprar en China.",
         "rating": 0,
@@ -81,7 +114,11 @@ const typesProducts = [
 
     {
         "name": "Samsung Galaxy A72",
-        "img": ["https://storage.comprasmartphone.com/smartphones/samsung-galaxy-a72.png"],
+        "img": [
+            "https://storage.comprasmartphone.com/smartphones/samsung-galaxy-a72.png",
+            "https://images.samsung.com/is/image/samsung/p6pim/ae/galaxy-a52/feature/ae-feature---397260513?$FB_TYPE_A_MO_JPG$",
+            "https://www.tuexperto.com/wp-content/uploads/2021/03/samsung-galaxy-a72-51.jpg"
+        ],
         "price": 165000,
         "description": "El Samsung Galaxy A72 es el tercer móvil que la marca coreana lanzaba al mercado en marzo de 2021. Al igual que sus hermanos, los A52 y A52 5G, este teléfono de la firma asiática llega presumiendo de especificaciones de gama media, pero con un buen número de características más propias de teléfonos que duplican el precio de este modelo.",
         "rating": 0,
@@ -91,7 +128,11 @@ const typesProducts = [
 
     {
         "name": "Samsung Galaxy A52",
-        "img": ["https://storage.comprasmartphone.com/smartphones/samsung-galaxy-a52.png"],
+        "img": [
+            "https://storage.comprasmartphone.com/smartphones/samsung-galaxy-a52.png",
+            "https://i0.wp.com/hipertextual.com/wp-content/uploads/2021/03/Samsung-Galaxy-A52-scaled.jpg?fit=2560%2C1920&ssl=1",
+            "https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2021/04/samsung-galaxy-a52-5g-analisis-2303793.jpg"
+        ],
         "price": 56760,
         "description": "Estamos ante un smartphone que presume de grandes especificaciones como una cuádruple cámara trasera donde encontramos un OIS para estabilizar fotos y vídeos, además de una pantalla Super AMOLED.",
         "rating": 0,
@@ -101,7 +142,11 @@ const typesProducts = [
 
     {
         "name": "Samsung Galaxy A32",
-        "img": ["https://i.ibb.co/txrQ6T7/D-NQ-NP-623578-MLA45658935026-042021-O.png"],
+        "img": [
+            "https://i.ibb.co/txrQ6T7/D-NQ-NP-623578-MLA45658935026-042021-O.png",
+            "https://images.samsung.com/is/image/samsung/p6pim/latin/feature/122781281/latin-feature---414176028?$FB_TYPE_A_MO_JPG$",
+            "https://i0.wp.com/isamarcial.com.mx/wp-content/uploads/2021/04/ELMWajOaii.png?fit=840%2C473&ssl=1"
+        ],
         "price": 61600,
         "description": "Con la mejor cámara, rendimiento y conectividad en un smartphone Galaxy, el Galaxy S22 Ultra reinventa la experiencia móvil al fusionar las funciones favoritas de los fanáticos de las series Note y S.",
         "rating": 0,
