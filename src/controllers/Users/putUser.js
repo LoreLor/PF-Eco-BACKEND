@@ -3,16 +3,24 @@ const User = require("../../models/User.js");
 //const normalizeString = require('../../utils/normalizeString.js');
 
 const putUser = async (req, res, next) => {
-    const { id } = req.params;
-    const { name,last_name, user_name, email, phone_number, address} = req.body;
+   
     try {
-       await User.update({
+
+        const { id } = req.params;
+        const { name, last_name, user_name, email, password, dni, phone_number, address, birthday, payment_method } = req.body;
+
+        await User.update({
             name,
             last_name,
             user_name,
             email,
+            password,
+            rol,
+            dni,
             phone_number,
-            address
+            address,
+            payment_method,
+            birthday
         }, {
             where: {
                 id:id
@@ -26,7 +34,7 @@ const putUser = async (req, res, next) => {
         })
         r.save()
         res.status(200).send(
-             r
+            r
         );
 
     } catch (err) {

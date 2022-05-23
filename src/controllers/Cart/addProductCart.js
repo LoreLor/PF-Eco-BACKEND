@@ -55,7 +55,7 @@ const addProductCart = async (req, res, next) => {
         status: null,
         open: true,
         userId: userId,
-        price_total: 1
+        price_total: 0
       });
 
       const cart = await searchCart(userId);

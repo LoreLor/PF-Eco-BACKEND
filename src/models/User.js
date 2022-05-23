@@ -58,6 +58,10 @@ const User = sequelize.define('user', {
     type: DataTypes.DATE,
     allowNull: true,
   },
+  payment_method:{
+    type: DataTypes.STRING,
+    allowNull: true,
+},
   isActive: {
     type: DataTypes.BOOLEAN,
     defaultValue: true,

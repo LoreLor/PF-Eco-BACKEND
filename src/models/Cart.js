@@ -9,10 +9,6 @@ const sequelize = require("../db");
       allowNull: false,
       primaryKey: true
     },
-    payment_method:{
-        type: DataTypes.STRING,  
-        defaultValue: "paypal"
-    },
     date:{
         type: DataTypes.DATE,
     },
