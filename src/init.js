@@ -1,3 +1,5 @@
+const Favorites = require("./models/Favorites.js");
+
 module.exports = function init() {
   const User = require("./models/User.js");
   const Category = require("./models/Category.js");
@@ -30,4 +32,7 @@ module.exports = function init() {
 
   Cart.belongsToMany(Product, { through: "cart_product" });
   Product.belongsToMany(Cart, { through: "cart_product" });
+
+  User.belongsToMany(Product, { through: Favorites });
+  Product.belongsToMany(User, { through: Favorites });
 };
