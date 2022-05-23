@@ -8,22 +8,25 @@ const paidCart = async (req, res, next) => {
 
     try {
         let cart = await Cart.findByPk(cartId,
-            {include: {
-                model: Detail,
-              }});
+            {
+                include: {
+                    model: Detail,
+                }
+            });
 
         if (cart) {
-                await Cart.update(
-                    {
-                        open: false,
-                    },
-                    {
-                        where: {
-                            id: cartId
-                        }
+            await Cart.update(
+                {
+                    status: "paid",
+                    open: false,
+                },
+                {
+                    where: {
+                        id: cartId
                     }
-                )
-                res.status(200).send("Cart closed.")
+                }
+            )
+            res.status(200).send("Accredited purchase.")
         } else {
             res.status(400).send("Cart not found.")
         }
