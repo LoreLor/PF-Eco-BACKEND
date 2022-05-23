@@ -4,7 +4,7 @@ const getReviews = async (req, res, next) => {
     try {
         const allReviews = await Review.findAll(
             {
-                attributes: ["title", "points", "description"]
+                attributes: ["id", "title", "points", "description", "detailId"]
             });
         if(allReviews.length) {
             return res.status(200).send(allReviews);
