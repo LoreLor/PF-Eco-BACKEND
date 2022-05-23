@@ -8,6 +8,7 @@ const deleteUser = require("../controllers/Users/deleteUser");
 const putUser = require("../controllers/Users/putUser");
 const userSignin = require("../controllers/Users/userSignin");
 const statusUser = require("../controllers/Users/statusUser")
+const bulkStatus = require("../controllers/Users/bulkStatus")
 
 router.post("/", postUser);
 router.get("/", getUsers);
@@ -16,5 +17,6 @@ router.delete("/:id", deleteUser);
 router.put("/:id", putUser);
 router.post("/signin", userSignin);
 router.put("/status/:id",statusUser)
+router.put("/bulk/off",bulkStatus)
 
 module.exports = router;
