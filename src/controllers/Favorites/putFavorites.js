@@ -14,7 +14,7 @@ const putFavorites = async (req, res, next) => {
 
         if(favorite.length) {
 
-            let eliminated = Favorites.destroy({
+            let eliminated = await Favorites.destroy({
                 where: {
                     id: favorite[0].id
                 }
