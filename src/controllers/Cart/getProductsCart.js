@@ -9,9 +9,21 @@ const getProductsCart = async(req, res)=>{
             where:{ userId: id, open: true },
             include: { 
                 model: Detail,
-                
              }
         });  
+
+        var sum = 0;
+        for (let i = 0; i < summaryDetail.details.length; i++) {
+            sum = sum + summaryDetail.details[i].price_total
+        }
+
+        await Cart.update({
+            price_total: sum
+         }, {
+            where: {
+               userId: id,
+            }
+         });
 
         res.status(200).send(summaryDetail)
     }catch(err){
