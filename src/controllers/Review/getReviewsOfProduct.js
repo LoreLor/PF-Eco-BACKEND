@@ -16,6 +16,27 @@ const getReviewsOfProduct = async (req, res, next) => {
             }]
         })
 
+        var sum = 0
+        var cont = 0
+        var prom = 0
+        for (let i = 0; i < product.dataValues.details.length; i++) {
+            sum = sum + product.dataValues.details[i].dataValues.review.dataValues.points
+            cont++;
+        }
+
+       prom = Math.ceil(sum/cont)
+
+       await Product.update(
+        {
+          rating: prom
+        },
+        {
+          where: {
+            id: productId
+          },
+        }
+        )
+
         if(product) {
             var detalles = product.dataValues.details;
             if(detalles.length) {
