@@ -17,11 +17,40 @@ const postReview = async (req, res, next) => {
                 model: Cart,
             }]
         })
+
+        let product = await Product.findByPk(detail.dataValues.productId, {
+            include: [{
+                model: Detail,
+                include: [{
+                    model: Review
+                }]
+            }]
+        })
+
+        let amountReviews = parseInt(product.dataValues.amountReviews) + 1
+        let amountRating = parseInt(product.dataValues.amountRating) + parseInt(points);
+        let newPoints = parseInt(amountRating) / parseInt(amountReviews)
         
+        await Product.update(
+            {
+                amountReviews: amountReviews,
+                amountRating: amountRating,
+                rating: Math.ceil(newPoints)
+            },
+            {
+                where: {
+                    id: detail.dataValues.productId
+                },
+            }
+        )
+
+
         const allReviews = await Review.findAll(
-            {where: {
-                detailId,
-            }},
+            {
+                where: {
+                    detailId,
+                }
+            },
             {
                 attributes: ["id", "title", "points", "description", "detailId"]
             });
@@ -31,7 +60,7 @@ const postReview = async (req, res, next) => {
             let findUser = await User.findByPk(findCart.dataValues.userId)
 
             if (title && points >= 0 && points <= 5 && description) {
-                if(allReviews.length === 0) {
+                if (allReviews.length === 0) {
 
                     let newReview = await Review.create({
                         autor: findUser.dataValues.user_name,
@@ -39,10 +68,10 @@ const postReview = async (req, res, next) => {
                         points,
                         description
                     })
-                    
+
                     detail.setReview(newReview);
                     detail.save();
-                    
+
                     return res.status(200).send("Review added successfully.");
                 } else {
                     return res.status(400).send("You have already added a review to this product.")

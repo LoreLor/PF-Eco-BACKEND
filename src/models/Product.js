@@ -34,6 +34,16 @@ const Product = sequelize.define("product", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  amountReviews: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+    allowNull: true
+  },
+  amountRating: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+    allowNull: true
+  },
   isActive: {
     type: DataTypes.BOOLEAN,
     defaultValue: true,

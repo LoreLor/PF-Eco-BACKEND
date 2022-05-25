@@ -16,37 +16,6 @@ const getReviewsOfProduct = async (req, res, next) => {
             }]
         })
 
-        if (product.dataValues.details)
-
-            var sum = 0
-        var cont = 0
-        var prom = 0
-
-        for (let i = 0; i < product.dataValues.details.length; i++) {
-            if (product.dataValues.details[i].dataValues.review !== null) {
-                sum = sum + product.dataValues.details[i].dataValues.review.dataValues.points
-                cont++;
-            }
-
-        }
-
-        if (sum && cont) {
-            prom = Math.ceil(sum / cont)
-        }
-
-        if (prom) {
-            await Product.update(
-                {
-                    rating: prom
-                },
-                {
-                    where: {
-                        id: productId
-                    },
-                }
-            )
-        }
-
         if (product) {
             var detalles = product.dataValues.details;
             if (detalles.length) {
