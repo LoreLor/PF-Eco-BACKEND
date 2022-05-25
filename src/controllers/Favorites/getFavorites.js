@@ -1,6 +1,5 @@
 const Favorites = require("../../models/Favorites.js");
-const Product = require("../../models/Product.js");
-const User = require("../../models/User.js");
+const Detail = require("../../models/Detail.js");
 
 const getFavorites = async (req, res, next) => {
     const { userId } = req.query
@@ -9,6 +8,9 @@ const getFavorites = async (req, res, next) => {
         let favorites = await Favorites.findAll({
             where: {
                 userId
+            },
+            include: {
+                model: Detail
             }
         })
         if(favorites) {
