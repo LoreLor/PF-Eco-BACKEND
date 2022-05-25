@@ -28,9 +28,6 @@ app.use((req,res,next)=>{
 })
 
 app.use('/', indexRouter);
-app.get('/api/config/paypal', (req, res)=>{
-  res.send(process.env.PAYPAL_CLIENT_ID || 'sb')
-})
 
 
 // Para manejar errores con next(error)

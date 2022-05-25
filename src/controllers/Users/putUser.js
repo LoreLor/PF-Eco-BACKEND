@@ -15,7 +15,6 @@ const putUser = async (req, res, next) => {
             user_name,
             email,
             password,
-            rol,
             dni,
             phone_number,
             address,
