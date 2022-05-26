@@ -14,7 +14,7 @@ const getFavorites = async (req, res, next) => {
         let infoFavs = []
         for (let i = 0; i < favorites.length; i++) {
             let products = await Product.findByPk(favorites[i].productId,
-                {attributes: ["name", "img"]}
+                {attributes: ["id", "name", "img"]}
                 )
             infoFavs.push(products)
         }
