@@ -18,6 +18,14 @@ const postReview = async (req, res, next) => {
             }]
         })
 
+        await Detail.update(
+            { hasReview: true, },
+            {
+                where: {
+                    id: detailId
+                }
+            })
+
         let product = await Product.findByPk(detail.dataValues.productId, {
             include: [{
                 model: Detail,
@@ -30,7 +38,7 @@ const postReview = async (req, res, next) => {
         let amountReviews = parseInt(product.dataValues.amountReviews) + 1
         let amountRating = parseInt(product.dataValues.amountRating) + parseInt(points);
         let newPoints = parseInt(amountRating) / parseInt(amountReviews)
-        
+
         await Product.update(
             {
                 amountReviews: amountReviews,
