@@ -10,4 +10,4 @@ app.listen(3001, () => {
     .then(console.log("Conectado a la base de datos"))
     .then(console.log('Listening at 3001'))
     .catch((e) => console.log(e));
-});2
+});
