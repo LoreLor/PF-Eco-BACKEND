@@ -37,6 +37,11 @@ const Detail = sequelize.define("detail", {
     type: DataTypes.DATE,
     allowNull: false,
   },
+  hasReview: {
+    type: DataTypes.BOOLEAN,
+    allowNull: true,
+    defaultValue: false
+  }
 });
 
 module.exports = Detail;
