@@ -24,7 +24,7 @@ const getFavorites = async (req, res, next) => {
         if(infoFavs.length) {
             res.status(200).send(infoFavs)
         } else {
-            res.status(400).send("No hay favoritos.")
+            res.status(200).send("No hay favoritos.")
         }
     } catch (error) {
         next(error);
