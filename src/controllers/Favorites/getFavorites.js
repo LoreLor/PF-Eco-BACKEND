@@ -1,5 +1,5 @@
 const Favorites = require("../../models/Favorites.js");
-const Detail = require("../../models/Detail.js");
+const Product = require("../../models/Product.js");
 
 const getFavorites = async (req, res, next) => {
     const { userId } = req.query
@@ -9,12 +9,18 @@ const getFavorites = async (req, res, next) => {
             where: {
                 userId
             },
-            include: {
-                model: Detail
-            }
         })
-        if(favorites) {
-            res.status(200).send(favorites)
+
+        let infoFavs = []
+        for (let i = 0; i < favorites.length; i++) {
+            let products = await Product.findByPk(favorites[i].productId,
+                {attributes: ["name", "img"]}
+                )
+            infoFavs.push(products)
+        }
+
+        if(infoFavs.length) {
+            res.status(200).send(infoFavs)
         } else {
             res.status(400).send("No hay favoritos.")
         }
