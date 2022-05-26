@@ -9,9 +9,15 @@ const userSignin = async (req, res, next) => {
             email: email,
         }
     });
+    if(user.isActive === false){
+        return res.status(200).json({
+            msg: "Account deactivated"
+        })
+    }
     if (user) {
         if (bcrypt.compareSync(password, user.password)) {
-            res.send({
+            return res.status(200).json({msg:"Login success", 
+            data:{
                 id: user.id,
                 name: user.name,
                 last_name: user.last_name,
@@ -20,12 +26,11 @@ const userSignin = async (req, res, next) => {
                 address: user.address,
                 phone_number: user.phone_number,
                 rol: user.rol,
-                token: generateToken(user)
-            });
-            return;
+                isActive: user.isActive,
+                token: generateToken(user)}})
         }
     };
-    res.status(401).send({ msg: 'Invalid email or password' })
+    res.status(200).send({ msg: 'Invalid email or password' })
 };
 
 
