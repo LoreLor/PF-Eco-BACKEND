@@ -12,12 +12,14 @@ const getFavorites = async (req, res, next) => {
         })
 
         let infoFavs = []
-        for (let i = 0; i < favorites.length; i++) {
-            let products = await Product.findByPk(favorites[i].productId,
-                {attributes: ["id", "name", "img"]}
-                )
-            infoFavs.push(products)
-        }
+        if(favorites) {
+            for (let i = 0; i < favorites.length; i++) {
+                let products = await Product.findByPk(favorites[i].productId,
+                    {attributes: ["id", "name", "img"]}
+                    )
+                    infoFavs.push(products)
+                }
+            }
 
         if(infoFavs.length) {
             res.status(200).send(infoFavs)
