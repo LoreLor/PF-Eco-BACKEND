@@ -19,6 +19,7 @@ const paidCart = async (req, res, next) => {
                 {
                     status: "paid",
                     open: false,
+                    date: new Date(),
                 },
                 {
                     where: {
