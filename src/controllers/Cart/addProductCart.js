@@ -44,7 +44,8 @@ const addProductCart = async (req, res, next) => {
       },
     });
 
-    
+    //console.log(productInCart.details[0]["bundle"]);
+
     //////////
 
     if (!userHasCart) {
@@ -82,10 +83,10 @@ const addProductCart = async (req, res, next) => {
     }
 
     if (productInCart && updated_quantity === "sum") {
-      if(bundle){
+      if(bundle > 1){
         await Detail.update(
           {
-            bundle: productInCart.details[0]["bundle"] + bundle,
+            bundle: productInCart.details[0]["bundle"] + parseInt(bundle, 10),
             price_total: producExists.price * (productInCart.details[0]["bundle"] + 1),
           },
           {
@@ -114,8 +115,7 @@ const addProductCart = async (req, res, next) => {
         res.status(200).send(
             `Producto actualizado, la cnatidad actualizada pasa a ser de: ${1}`
           );
-      }
-
+      };
     }else if(productInCart && updated_quantity === "rest" && productInCart.details[0]["bundle"] <= 1 ){
       res.send("No se puede restar mas de uno");
       
