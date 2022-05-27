@@ -5,7 +5,7 @@ const Detail = require("../../models/Detail.js");
 
 const addProductCart = async (req, res, next) => {
   try {
-    const { userId, productId, updated_quantity } = req.query;
+    const { userId, productId, updated_quantity, bundle } = req.query;
 
     //Verifica que el usuario disponga de un carrito disponible
     const userHasCart = await User.findOne({
@@ -83,22 +83,39 @@ const addProductCart = async (req, res, next) => {
     }
 
     if (productInCart && updated_quantity === "sum") {
-      await Detail.update(
-        {
-          bundle: productInCart.details[0]["bundle"] + 1,
-          price_total: producExists.price * (productInCart.details[0]["bundle"] + 1),
-        },
-        {
-          where: {
-            productId: productId,
+      if(bundle > 1){
+        await Detail.update(
+          {
+            bundle: productInCart.details[0]["bundle"] + parseInt(bundle, 10),
+            price_total: producExists.price * (productInCart.details[0]["bundle"] + 1),
           },
-        }
-      );
-
-      res.status(200).send(
-          `Producto actualizado, la cnatidad actualizada pasa a ser de: ${1}`
+          {
+            where: {
+              productId: productId,
+            },
+          }
         );
-
+  
+        res.status(200).send(
+            `Producto actualizado, la cnatidad actualizada pasa a ser de: ${1}`
+          );
+      }else{
+        await Detail.update(
+          {
+            bundle: productInCart.details[0]["bundle"] + 1,
+            price_total: producExists.price * (productInCart.details[0]["bundle"] + 1),
+          },
+          {
+            where: {
+              productId: productId,
+            },
+          }
+        );
+  
+        res.status(200).send(
+            `Producto actualizado, la cnatidad actualizada pasa a ser de: ${1}`
+          );
+      };
     }else if(productInCart && updated_quantity === "rest" && productInCart.details[0]["bundle"] <= 1 ){
       res.send("No se puede restar mas de uno");
       
