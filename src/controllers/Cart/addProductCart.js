@@ -82,7 +82,22 @@ const addProductCart = async (req, res, next) => {
       });
     }
 
-    if (productInCart && updated_quantity === "sum") {
+    if(!productInCart && updated_quantity === "sum"){
+      //Ingresar el nuevo dato a los detalles del carrito
+      const purchaseDetails = await Detail.create({
+        name: producExists.name,
+        img: producExists.img[0],
+        price: producExists.price,
+        price_total: producExists.price * bundle,
+        bundle: bundle,
+        stock: producExists.stock,
+        date: new Date(),
+        cartId: userHasCart.carts[0].id,
+        productId: productId,
+      });
+
+      res.send(purchaseDetails);
+    } else if (productInCart && updated_quantity === "sum") {
       if(bundle > 1){
         await Detail.update(
           {
@@ -102,7 +117,7 @@ const addProductCart = async (req, res, next) => {
       }else{
         await Detail.update(
           {
-            bundle: productInCart.details[0]["bundle"] + parseInt(bundle, 10),
+            bundle: productInCart.details[0]["bundle"] + 1,
             price_total: producExists.price * (productInCart.details[0]["bundle"] + 1),
           },
           {
@@ -155,6 +170,8 @@ const addProductCart = async (req, res, next) => {
 
       res.send(purchaseDetails);
     }
+
+
   } catch (err) {
     console.log(err);
     next(err);
