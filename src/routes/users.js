@@ -9,7 +9,7 @@ const putUser = require("../controllers/Users/putUser");
 const userSignin = require("../controllers/Users/userSignin");
 const statusUser = require("../controllers/Users/statusUser")
 const bulkStatus = require("../controllers/Users/bulkStatus")
-const google = require("../controllers/Users/userSigninGoogle")
+
 
 router.post("/", postUser);
 router.get("/", getUsers);
@@ -19,6 +19,6 @@ router.put("/:id", putUser);
 router.post("/signin", userSignin);
 router.put("/status/:id",statusUser)
 router.put("/bulk/off",bulkStatus)
-router.post('/auth/google', google)
+
 
 module.exports = router;
