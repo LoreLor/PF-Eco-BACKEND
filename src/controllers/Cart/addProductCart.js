@@ -102,7 +102,7 @@ const addProductCart = async (req, res, next) => {
         await Detail.update(
           {
             bundle: productInCart.details[0]["bundle"] + parseInt(bundle, 10),
-            price_total: producExists.price * (productInCart.details[0]["bundle"] + 1),
+            price_total: producExists.price * (bundle),
           },
           {
             where: {
