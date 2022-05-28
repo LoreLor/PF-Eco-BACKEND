@@ -32,9 +32,7 @@ const putUser = async (req, res, next) => {
             }
         })
         r.save()
-        res.status(200).send(
-            r
-        );
+        res.status(200).send(r)
 
     } catch (err) {
         next(err)
