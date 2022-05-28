@@ -9,7 +9,7 @@ const userSignin = async (req, res, next) => {
             email: email,
         }
     });
-    if(user.isActive === false){
+    if(user && user.isActive === false){
         return res.status(200).json({
             msg: "Account deactivated"
         })
