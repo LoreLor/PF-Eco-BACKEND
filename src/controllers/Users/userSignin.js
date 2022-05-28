@@ -26,7 +26,9 @@ const userSignin = async (req, res, next) => {
                 address: user.address,
                 phone_number: user.phone_number,
                 rol: user.rol,
-                isActive: user.isActive,
+                birthday: user.birthday,
+                dni: user.dni,
+                payment_method: user.payment_method,
                 token: generateToken(user)}})
         }
     };

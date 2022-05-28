@@ -20,8 +20,12 @@
     "jsonwebtoken": "^8.5.1",
     "morgan": "~1.9.1",
     "multer": "^1.4.4",
+<<<<<<< HEAD
     "passport": "^0.6.0",
     "passport-google-oauth20": "^2.0.0",
+=======
+    "nodemailer": "^6.7.5",
+>>>>>>> 229571044d6a41bd6b10dd4608af023f0d20e006
     "uuid": "^8.3.2"
   },
   "devDependencies": {
