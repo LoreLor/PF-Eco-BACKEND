@@ -44,8 +44,6 @@ const addProductCart = async (req, res, next) => {
       },
     });
 
-    //console.log(productInCart.details[0]["bundle"]);
-
     //////////
 
     if (!userHasCart) {
