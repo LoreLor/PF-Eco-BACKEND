@@ -2,7 +2,6 @@ const User = require("../../models/User.js");
 
 const bulkStatus = async (req, res, next) => {
     const { array } = req.body;
-    console.log(array)
    if(array.length === 0){ return res.status(200).json({msg: "Users not selected"})}
     try {
         array.forEach(async user => {

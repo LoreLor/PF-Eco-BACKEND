@@ -9,11 +9,13 @@ const putUser = require("../controllers/Users/putUser");
 const userSignin = require("../controllers/Users/userSignin");
 const statusUser = require("../controllers/Users/statusUser")
 const bulkStatus = require("../controllers/Users/bulkStatus")
+const userProfile = require("../controllers/Users/userProfile")
 
 router.post("/", postUser);
 router.get("/", getUsers);
 router.get("/:id", getUserByID);
 router.delete("/:id", deleteUser);
+router.put("/update/:id",userProfile)
 router.put("/:id", putUser);
 router.post("/signin", userSignin);
 router.put("/status/:id",statusUser)
