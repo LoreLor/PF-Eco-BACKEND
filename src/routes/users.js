@@ -8,7 +8,9 @@ const deleteUser = require("../controllers/Users/deleteUser");
 const putUser = require("../controllers/Users/putUser");
 const userSignin = require("../controllers/Users/userSignin");
 const statusUser = require("../controllers/Users/statusUser")
-const bulkStatus = require("../controllers/Users/bulkStatus")
+const bulkStatus = require("../controllers/Users/bulkStatus");
+const { Router } = require("express");
+const googleLogin = require("../controllers/users/googleLogin")
 
 
 router.post("/", postUser);
@@ -18,7 +20,8 @@ router.delete("/:id", deleteUser);
 router.put("/:id", putUser);
 router.post("/signin", userSignin);
 router.put("/status/:id",statusUser)
-router.put("/bulk/off",bulkStatus)
+router.put("/bulk/off",bulkStatus);
+router.post('/googlelogin', googleLogin)
 
 
 module.exports = router;

@@ -9,11 +9,11 @@ const userSignin = async (req, res, next) => {
             email: email,
         }
     });
-    if(user.isActive === false){
-        return res.status(200).json({
-            msg: "Account deactivated"
-        })
-    }
+    // if(user.isActive === false){
+    //     return res.status(200).json({
+    //         msg: "Account deactivated"
+    //     })
+    // }
     if (user) {
         if (bcrypt.compareSync(password, user.password)) {
             return res.status(200).json({msg:"Login success", 
