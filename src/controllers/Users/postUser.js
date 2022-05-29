@@ -35,17 +35,9 @@ const postUser = async (req, res, next) => {
         });
 
         await userNew.addCart(cartNew);
-        const dataUserCart = await User.findOne({
-            where: {
-                id: userNew.id,
-            },
-            include: {
-                model: Cart,
-            }
-        });
 
         if(userNew){
-            return res.status(201).send(dataUserCart)
+            return res.status(201).json({msg:"User registered"})
         }
     } catch (error) {
         next(error);
