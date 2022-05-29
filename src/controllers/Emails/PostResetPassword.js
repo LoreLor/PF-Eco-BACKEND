@@ -1,7 +1,8 @@
 const User = require("../../models/User");
 
+const bcrypt = require("bcrypt")
+
 const jwt = require("jsonwebtoken");
-const nodemailer = require("nodemailer");
 
 const { JWT_SECRET } = process.env;
 
@@ -26,7 +27,7 @@ const post_reset_password = async (req, res, next) => {
     user.password = pass;
 
     await User.update({
-        password: pass
+        password: bcrypt.hashSync(pass, 8)
     }, {
         where: { id: id }
     });
