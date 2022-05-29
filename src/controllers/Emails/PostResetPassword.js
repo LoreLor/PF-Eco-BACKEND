@@ -2,16 +2,12 @@ const User = require("../../models/User");
 
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
-const JWT_SECRET = "e-commerceCitYCelL_PF"
 
-const { USER_EMAIL,
-    PASS_EMAIL_APP
-} = process.env;
-
+const { JWT_SECRET } = process.env;
 
 const post_reset_password = async (req, res, next) => {
   const { id, token } = req.params;
-  const { pass, pass2 } = req.body;
+  const { pass } = req.body;
 
   const user = await User.findOne({
     where: {
@@ -32,9 +28,7 @@ const post_reset_password = async (req, res, next) => {
     await User.update({
         password: pass
     }, {
-        where: {
-            id: id
-        }
+        where: { id: id }
     });
 
     res.status(200).send("Contraseña actualizada");

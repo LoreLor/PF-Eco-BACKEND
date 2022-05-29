@@ -2,10 +2,8 @@ const User = require("../../models/User");
 
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
-const JWT_SECRET = "e-commerceCitYCelL_PF"
 
-const {USER_EMAIL,
-    PASS_EMAIL_APP} = process.env;
+const { JWT_SECRET, USER_EMAIL, PASS_EMAIL_APP} = process.env;
 
 
 const post_forgot_password = async (req, res, next) => {

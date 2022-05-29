@@ -1,8 +1,7 @@
 const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
 
-const JWT_SECRET = "e-commerceCitYCelL_PF"
-
+const { JWT_SECRET } = process.env;
 
 const get_reset_password = async (req, res, next) => {
     const {id, token} = req.params;
