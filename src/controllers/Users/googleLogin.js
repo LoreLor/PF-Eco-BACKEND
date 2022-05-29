@@ -1,49 +1,60 @@
-const { response } = require('express');
-const {OAuth2Client} = require('google-auth-library');
-const User = require('../../models/User');
-const jwt = require('jsonwebtoken');
+const { OAuth2Client } = require("google-auth-library");
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const client = new OAuth2Client(process.env.CLIENT_SECRET)
+const User = require("../../models/User");
+const client = new OAuth2Client(process.env.CLIENT_SECRET);
 
 
 
-const googleLogin = (req, res) =>{
-    const{idToken} = req.body;
-    console.log('credential', idToken)
-     
-    client.verifyIdToken({idToken, audience: process.env.REACT_APP_GOOGLE_CLIENT_ID})
-        .then(response=>{
-             const {email_verified, name , email} = response.payload;     
-                console.log('response.payload', response.payload)
+const googleLogin = async (req, res) => {
+    const { idToken } = req.body;
+    console.log("credential", idToken);
 
-        if(email_verified){
-            const user = User.findOne({where:{email: email}})
-            if(user){
-                const token = jwt.sign({
-                    id: user.id,
-                    name: user.name,
-                    email: user.email,
-                }, process.env.JWT_KEY || 'secret', {expiresIn: '7d'})             
-                res.json({
-                    token, 
-                    user
-                })
-            }else{
-                res.status(400).json({msg:'Somthing went wrong'})
-            }
-        }else{
+    const userAuth = await client.verifyIdToken({
+        idToken,
+        audience: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+    });
+    const { email_verified, name, email, family_name, given_name } = userAuth.payload;
 
-            //si no existe me creo el usuario
-            let password  = email+process.env.JWT_KEY;
-            const userNew = User.create({
-              name,
-              email: email,
-              password: bcrypt.hashSync(password, 8),
-            });
-            res.status(201).send(userNew);
-          }
-        
-        })
-      }
+    const userFound = await User.findOne({
+        where: {
+            email: email,
+        },
+    });
 
-module.exports = googleLogin
+
+    if (email_verified !== false && userFound) {
+        res.send(userFound);
+
+    } else if (email_verified !== true && userFound) {
+        const user = await User.findOne({ where: { email: email } });
+        const token = jwt.sign(
+            {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+            },
+            process.env.JWT_KEY || "secret",
+            { expiresIn: "7d" }
+        );
+        res.json({
+            token,
+            user,
+        });
+        res.status(400).json({ msg: "Somthing went wrong" });
+
+    } else {
+        // si no existe me creo el usuario
+        let password = email + process.env.JWT_KEY;
+        const userNew = await User.create({
+            name: name,
+            email: email,
+            password: bcrypt.hashSync(password, 8),
+            last_name: family_name,
+            user_name: given_name,
+        });
+        res.status(201).send(userNew);
+    }
+};
+
+module.exports = googleLogin;

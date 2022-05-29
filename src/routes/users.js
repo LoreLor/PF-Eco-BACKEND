@@ -8,15 +8,11 @@ const deleteUser = require("../controllers/Users/deleteUser");
 const putUser = require("../controllers/Users/putUser");
 const userSignin = require("../controllers/Users/userSignin");
 const statusUser = require("../controllers/Users/statusUser")
-<<<<<<< HEAD
 const bulkStatus = require("../controllers/Users/bulkStatus");
 const { Router } = require("express");
-const googleLogin = require("../controllers/users/googleLogin")
-
-=======
-const bulkStatus = require("../controllers/Users/bulkStatus")
+const googleLogin = require("../controllers/Users/googleLogin")
 const userProfile = require("../controllers/Users/userProfile")
->>>>>>> 229571044d6a41bd6b10dd4608af023f0d20e006
+
 
 router.post("/", postUser);
 router.get("/", getUsers);
