@@ -50,14 +50,14 @@ const post_forgot_password = async (req, res, next) => {
         from: "City Cell",
         to: user.email,
         subject: `Recuperacion de constraseña`,
-        text: link
+        text: `Entra a este link: ${link}`,
     };
 
     mailTransporter.sendMail(details, (err)=>{
         if(err){
-            res.status(404).send("No enviado")
+            res.render("messageError")
         }else{
-            res.status(200).send("Mensaje enviado")
+            res.render("messageSent")
         }
     });
   } catch (err) {
