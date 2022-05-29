@@ -1,5 +1,10 @@
 const User = require("../../models/User.js");
+<<<<<<< HEAD
 const bcrypt = require("bcrypt");
+=======
+const Cart = require("../../models/Cart.js");
+const bcrypt = require("bcrypt")
+>>>>>>> 12c7df39631dbb3e8217d71a267c5765935210d9
 
 const postUser = async (req, res, next) => {
   const { name, last_name, user_name, email, password } = req.body;
@@ -14,15 +19,48 @@ const postUser = async (req, res, next) => {
     if (existUN || existEmail) {
       return res.status(200).json({ msg: "User or Email already registered" });
     }
-    const userNew = User.create({
-      name,
-      last_name,
-      user_name,
-      email: email,
-      password: bcrypt.hashSync(password, 8),
-    });
-    if (userNew) {
-      return res.status(201).json({ msg: "User registered" });
+    try {
+
+        const [existUN,existEmail] = await Promise.all([
+            User.findOne({where:{user_name:user_name}}),
+            User.findOne({where:{email:email}}),
+        ])
+        if(existUN || existEmail){
+            return res.status(200).json({msg: "User or Email already registered"})
+        }
+
+        const userNew = await User.create({
+            name,
+            last_name,
+            user_name,
+            email: email,
+            password: bcrypt.hashSync(password, 8),
+        })
+
+        const cartNew = await Cart.create({
+            payment_method: null,
+            date: null,
+            status: null,
+            open: true,
+            userId: userNew.id,
+            price_total: 0
+        });
+
+        await userNew.addCart(cartNew);
+        const dataUserCart = await User.findOne({
+            where: {
+                id: userNew.id,
+            },
+            include: {
+                model: Cart,
+            }
+        });
+
+        if(userNew){
+            return res.status(201).send(dataUserCart)
+        }
+    } catch (error) {
+        next(error);
     }
   } catch (error) {
     next(error);
