@@ -1,10 +1,6 @@
 const User = require("../../models/User.js");
-<<<<<<< HEAD
-const bcrypt = require("bcrypt");
-=======
 const Cart = require("../../models/Cart.js");
 const bcrypt = require("bcrypt")
->>>>>>> 12c7df39631dbb3e8217d71a267c5765935210d9
 
 const postUser = async (req, res, next) => {
   const { name, last_name, user_name, email, password } = req.body;
