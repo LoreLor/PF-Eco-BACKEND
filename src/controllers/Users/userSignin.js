@@ -1,4 +1,5 @@
 const User = require("../../models/User.js");
+const Cart = require("../../models/Cart.js");
 const {generateToken} = require("../../utils/generateToken.js");
 const bcrypt = require("bcryptjs")
 
@@ -7,6 +8,9 @@ const userSignin = async (req, res, next) => {
     const user = await User.findOne({
         where: {
             email: email,
+        },
+        include: {
+            model: Cart,
         }
     });
     if(user && user.isActive === false){
@@ -29,6 +33,7 @@ const userSignin = async (req, res, next) => {
                 birthday: user.birthday,
                 dni: user.dni,
                 payment_method: user.payment_method,
+                carts: user.carts,
                 token: generateToken(user)}})
         }
     };
