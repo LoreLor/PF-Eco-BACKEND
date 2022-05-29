@@ -32,7 +32,7 @@ const post_reset_password = async (req, res, next) => {
         where: { id: id }
     });
 
-    res.status(200).send("Contraseña actualizada");
+    res.render("updatePassword");
   } catch (err) {
     console.log(err.message);
     res.send(err.message);
