@@ -2,6 +2,7 @@ const { OAuth2Client } = require("google-auth-library");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../../models/User");
+const Cart = require("../../models/Cart")
 const client = new OAuth2Client(process.env.CLIENT_SECRET);
 
 
@@ -54,6 +55,25 @@ const googleLogin = async (req, res) => {
             user_name: given_name,
         });
         res.status(201).send(userNew);
+        const cartNew = await Cart.create({
+            payment_method: null,
+            date: null,
+            status: null,
+            open: true,
+            userId: userNew.id,
+            price_total: 0
+        });
+
+        await userNew.addCart(cartNew);
+        const dataUserCart = await User.findOne({
+            where: {
+                id: userNew.id,
+            },
+            include: {
+                model: Cart,
+            }
+        });
+
     }
 };
 
