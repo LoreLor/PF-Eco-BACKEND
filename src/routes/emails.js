@@ -8,7 +8,7 @@ const post_forgot_password = require("../controllers/Emails/PostForgotPassword")
 const get_reset_password = require("../controllers/Emails/GetResetPassword");
 const post_reset_password = require("../controllers/Emails/PostResetPassword");
 
-router.post("/sendEmail/:userId", purchaseEmail);
+router.post("/sendEmail/:userId/:cartId", purchaseEmail);
 router.post("/lowStockAdmin", lowStockAdmin);
 router.get("/forgot-password", get_forgot_password)
 router.post("/forgot-password", post_forgot_password)
