@@ -1,10 +1,8 @@
 const Cart = require("../../models/Cart.js");
 const Detail = require("../../models/Detail.js");
 
-
 const myCarts = async (req, res, next) => {
     const { userId } = req.query;
-
 
     try {
         let cart = await Cart.findAll({
