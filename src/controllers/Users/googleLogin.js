@@ -32,7 +32,7 @@ const googleLogin = async (req, res) => {
         const token = jwt.sign(
             {
                 id: user.id,
-                name: user.name,
+                name: user.give_name,
                 email: user.email,
             },
             process.env.JWT_KEY || "secret",
@@ -48,7 +48,7 @@ const googleLogin = async (req, res) => {
         // si no existe me creo el usuario
         let password = email + process.env.JWT_KEY;
         const userNew = await User.create({
-            name: name,
+            name: given_name,
             email: email,
             password: bcrypt.hashSync(password, 8),
             last_name: family_name,
