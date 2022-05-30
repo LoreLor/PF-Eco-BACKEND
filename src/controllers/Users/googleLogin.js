@@ -8,8 +8,7 @@ const client = new OAuth2Client(process.env.CLIENT_SECRET);
 
 
 const googleLogin = async (req, res) => {
-    const { idToken } = req.body;
-    /* console.log("credential", idToken); */
+    const { idToken } = req.body
 
     const userAuth = await client.verifyIdToken({
         idToken,
@@ -81,15 +80,6 @@ const googleLogin = async (req, res) => {
         });
 
         await userNew.addCart(cartNew);
-/*         const dataUserCart = await User.findOne({
-            where: {
-                id: userNew.id,
-            },
-            include: {
-                model: Cart,
-            }
-        }); */
-
     }
 };
 
