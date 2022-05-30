@@ -43,7 +43,7 @@ const postReview = async (req, res, next) => {
             {
                 amountReviews: amountReviews,
                 amountRating: amountRating,
-                rating: Math.ceil(newPoints)
+                rating: Math.round(newPoints)
             },
             {
                 where: {
