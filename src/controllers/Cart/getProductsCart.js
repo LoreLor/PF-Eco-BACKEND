@@ -22,7 +22,7 @@ const getProductsCart = async(req, res)=>{
                 price_total: sum
             }, {
                 where: {
-                    userId: id,
+                    id: summaryDetail.id,
                 }
             });
         }

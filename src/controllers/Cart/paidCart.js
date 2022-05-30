@@ -15,11 +15,17 @@ const paidCart = async (req, res, next) => {
             });
 
         if (cart) {
+            var sum = 0;
+                for (let i = 0; i < cart.details.length; i++) {
+                    sum = sum + cart.details[i].price_total
+                }
+
             await Cart.update(
                 {
                     status: "paid",
                     open: false,
                     date: new Date(),
+                    price_total: sum
                 },
                 {
                     where: {

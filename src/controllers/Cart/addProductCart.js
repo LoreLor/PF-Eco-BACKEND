@@ -110,7 +110,7 @@ const addProductCart = async (req, res, next) => {
         );
   
         res.status(200).send(
-            `Producto actualizado, la cnatidad actualizada pasa a ser de: ${1}`
+            `Producto actualizado, la cantidad actualizada pasa a ser de: ${1}`
           );
       }else{
         await Detail.update(
@@ -126,7 +126,7 @@ const addProductCart = async (req, res, next) => {
         );
   
         res.status(200).send(
-            `Producto actualizado, la cnatidad actualizada pasa a ser de: ${1}`
+            `Producto actualizado, la cantidad actualizada pasa a ser de: ${1}`
           );
       };
     }else if(productInCart && updated_quantity === "rest" && productInCart.details[0]["bundle"] <= 1 ){
@@ -145,7 +145,7 @@ const addProductCart = async (req, res, next) => {
       );
 
       res.status(200).send(
-          `Producto actualizado, la cnatidad actualizada pasa a ser de: ${1}`
+          `Producto actualizado, la cantidad actualizada pasa a ser de: ${1}`
         );
 
     } else if (userHasCart && producExists) {
