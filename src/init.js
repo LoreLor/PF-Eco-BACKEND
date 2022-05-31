@@ -6,7 +6,6 @@ module.exports = function init() {
   const Cart = require("./models/Cart.js");
   const Review = require("./models/Review.js")
   const Favorites = require("./models/Favorites.js");
-  ////relaciones////
 
   User.belongsToMany(Product, { through: "user_product" });
   Product.belongsToMany(User, { through: "user_product" });
