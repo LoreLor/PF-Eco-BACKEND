@@ -9,7 +9,7 @@ const { JWT_SECRET, USER_EMAIL, PASS_EMAIL_APP} = process.env;
 const post_forgot_password = async (req, res, next) => {
   try {
     const { email } = req.body;
-
+    console.log(email)
     const user = await User.findOne({
         where: {
             email: email
@@ -34,8 +34,7 @@ const post_forgot_password = async (req, res, next) => {
 
     //Este link se debe enviar por email al usuario
     const link = `http://localhost:3001/email/reset-password/${user.id}/${token}`;
-    //console.log(link);
-
+    
     ///*
     ///*
     let mailTransporter = nodemailer.createTransport({
@@ -55,9 +54,9 @@ const post_forgot_password = async (req, res, next) => {
 
     mailTransporter.sendMail(details, (err)=>{
         if(err){
-            res.render("messageError")
+            res.status(404).send("Error al enviar el email");
         }else{
-            res.render("messageSent")
+            res.status(200).send("Email enviado");
         }
     });
   } catch (err) {

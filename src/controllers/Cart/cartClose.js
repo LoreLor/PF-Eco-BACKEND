@@ -3,11 +3,6 @@ const Cart = require("../../models/Cart.js");
 const User = require("../../models/User.js");
 const Detail = require("../../models/Detail.js");
 
-//Actualizamos ese cart a -> status: pagado, fecha: fecha_actual, open: false
-
-//Actualizar los stock de los productos que ya fueron comprados
-//  Restar los bundles de los productos al stock principal del producto en cuestion
-
 const cartClose = async (req, res, next) => {
   try {
     const { userId, cartId } = req.params;
