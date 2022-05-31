@@ -5,7 +5,7 @@ const getUsers = async (req, res, next) => {
     try {
         let users = await User.findAll(
             {
-                attributes: ["user_name", "id","isActive","email"]
+                attributes: ["user_name", "id","isActive","email","rol"]
             }
         );
         res.status(200).send(users)
