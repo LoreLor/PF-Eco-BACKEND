@@ -15,7 +15,7 @@ const deleteCategory = async (req, res, next) => {
         })
         
         if(category.dataValues.products.length > 0) {
-            res.status(200).json({msg:`Imposible to delete`})
+            res.status(200).json({msg:"Category has products linked"})
         } else {
             let deleted = await Category.destroy({
                 where: {
