@@ -5,7 +5,11 @@ const purchaseEmail = require("../controllers/Emails/PurchaseEmail");
 const lowStockAdmin = require("../controllers/Emails/LowStockAdmin");
 
 
+<<<<<<< Updated upstream
 //const get_forgot_password = require("../controllers/Emails/GetForgotPassword");
+=======
+const get_forgot_password = require("../controllers/Emails/GetForgotPassword");
+>>>>>>> Stashed changes
 const post_forgot_password = require("../controllers/Emails/PostForgotPassword");
 const get_reset_password = require("../controllers/Emails/GetResetPassword");
 const post_reset_password = require("../controllers/Emails/PostResetPassword");
