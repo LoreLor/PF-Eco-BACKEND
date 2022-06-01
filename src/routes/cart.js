@@ -14,6 +14,7 @@ let myCarts = require("../controllers/Cart/myCarts")
 let getAllCartsPaid = require("../controllers/Cart/getAllCartsPaid")
 let cartClose = require("../controllers/Cart/cartClose")
 let sendStatus = require("../controllers/Cart/sendStatus")
+let applyDiscount = require("../controllers/Cart/applyDiscount")
 
 router.get("/:id", getProductsCart)
 router.post("/", addProductCart)
@@ -24,6 +25,7 @@ router.get("/", myCarts)
 router.get("/paid/all", getAllCartsPaid)
 router.put("/status/:cartId", sendStatus)
 router.put("/close/:userId/:cartId", cartClose);
+router.put("/discount/", applyDiscount);
 
 //router.get("/", getProducts)
 // router.put("/products-cart/:productId", putProduct)
