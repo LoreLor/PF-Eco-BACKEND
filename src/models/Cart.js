@@ -20,7 +20,7 @@ const sequelize = require("../db");
     sendStatus: {
       type: DataTypes.STRING,
       defaultValue: "pending",
-      enum: ["pending", "delivered", "returned"],
+      enum: ["pending","shipped", "delivered", "returned"],
       allowNull: true,
     },
     price_total:{
