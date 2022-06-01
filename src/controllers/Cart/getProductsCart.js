@@ -26,7 +26,6 @@ const getProductsCart = async(req, res)=>{
                 }
             });
         }
-            
         res.status(200).send(summaryDetail)
     }catch(err){
         console.log(err)

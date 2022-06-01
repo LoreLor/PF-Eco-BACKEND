@@ -33,14 +33,9 @@ const post_forgot_password = async (req, res, next) => {
     });
 
     //Este link se debe enviar por email al usuario
-<<<<<<< Updated upstream
-    const link = `http://localhost:3001/email/reset-password/${user.id}/${token}`;
-    
-=======
     const link = `http://localhost:3000/email/reset-password/${user.id}/${token}`;
     
 
->>>>>>> Stashed changes
     ///*
     ///*
     let mailTransporter = nodemailer.createTransport({
@@ -60,15 +55,9 @@ const post_forgot_password = async (req, res, next) => {
 
     mailTransporter.sendMail(details, (err)=>{
         if(err){
-<<<<<<< Updated upstream
-            res.status(404).send("Error al enviar el email");
-        }else{
-            res.status(200).send("Email enviado");
-=======
             res.send("Error")
         }else{
             res.send("Mensaje enviado")
->>>>>>> Stashed changes
         }
     });
   } catch (err) {

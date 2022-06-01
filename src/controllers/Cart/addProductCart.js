@@ -19,14 +19,14 @@ const addProductCart = async (req, res, next) => {
         },
       },
     });
-
+    
     //Verifica si el producto existe en la base de datos
     const producExists = await Product.findOne({
       where: {
         id: productId,
       },
     });
-
+    
     //Verificar si el producto ya se encuentra dentro del carrito
     const productInCart = await Cart.findOne({
       where: {
