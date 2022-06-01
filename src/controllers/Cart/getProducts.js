@@ -4,14 +4,6 @@ const User = require("../../models/User.js");
 
 const getProducts = async (req, res) => {
   const { userId, cart } = req.query;
-  ///////////////////////////////////////////////¿ COMO USAR ?///////////////////////////////////////////////////////////////////
-  //Se mandan un body con 2 propiedades                                                                                        //
-  //               1) userId <-- el id del usuario que quiere acceder a su carrito                                             //
-  //               2) cart <---- debe contener un string 'actual' o 'all'                                                      //
-  //                             'actual'<- devuelve el carrito que se esta usando en este momento                             //
-  //                             'all'<---- devuelve todos los carritos asociados al usuario, sirve para obtener el historial  //
-  //Ejemplo de ruta -->  localhost:3001/cart?userId='1'&&cart='all'  <--                                                       //
-  ///////////////////////////////////////////////////////// // //////////////////////////////////////////////////////////////////
 
   if (userId && cart === "actual") {
     const carro = getCarrito(userId);
@@ -20,7 +12,7 @@ const getProducts = async (req, res) => {
     const all_carritos = await Cart.findAll({ where: { userId } });
     res.send(all_carritos);
   } else {
-    res.send("manda bien los datos");
+    res.send("Envio de datos no validos");
   }
 };
 

@@ -8,7 +8,7 @@ const { JWT_SECRET } = process.env;
 
 const post_reset_password = async (req, res, next) => {
   const { id, token } = req.params;
-  const { pass } = req.body;
+  const { pass, pass2 } = req.body;
 
   const user = await User.findOne({
     where: {
