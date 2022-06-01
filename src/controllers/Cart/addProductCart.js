@@ -80,7 +80,7 @@ const addProductCart = async (req, res, next) => {
       });
     }
 
-    if(!productInCart && updated_quantity === "sum"){
+    if(!productInCart && updated_quantity === "sum" && userHasCart){
       //Ingresar el nuevo dato a los detalles del carrito
       const purchaseDetails = await Detail.create({
         name: producExists.name,
