@@ -81,16 +81,6 @@ const paidCart = async (req, res, next) => {
           );
         });
     
-        //Crear un nuevo carrito al usuario
-        await Cart.create({
-          payment_method: null,
-          date: null,
-          status: null,
-          open: true,
-          userId: userId,
-          price_total: 0,
-        });
-    
         ////*Factura de compra - Email*/
     
         let mailTransporter = nodemailer.createTransport({
