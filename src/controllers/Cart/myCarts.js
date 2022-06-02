@@ -13,9 +13,9 @@ const myCarts = async (req, res, next) => {
         });
 
         if (cart) {
-            res.status(200).send(cart)
+            return res.status(200).send(cart)
         } else {
-            res.status(400).send("Cart not found.")
+            return res.status(400).send("Cart not found.")
         }
 
     } catch (err) {
