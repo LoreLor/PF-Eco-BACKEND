@@ -14,10 +14,11 @@ const lowStockAdmin = async(req, res, next)=>{
                 rol: "admin"
             }
         });
+        
         let emailAdmins = admins.map(el => el.email)
         
         let allProducts = await Product.findAll();
-        let lowStcokProducts = allProducts.filter(el => el.stock <= 10);
+        let lowStcokProducts = allProducts.filter(el => el.stock <= 5);
         let dataLowStcokProducts = lowStcokProducts.map(el =>{
             return({
                 id: el.id,
@@ -25,16 +26,14 @@ const lowStockAdmin = async(req, res, next)=>{
                 stock: el.stock,
                 img: el.img
             })
-        }) 
-
-
-        ////////*
+        });
 
         let cadena = dataLowStcokProducts.map(el => `ID: ${el.id} 
          Name product: ${el.name} 
          Sctock ${el.stock} 
          Image product: ${el.img} \n`)
         
+        ////////*
 
         let mailTransporter = nodemailer.createTransport({
             service: "gmail",
