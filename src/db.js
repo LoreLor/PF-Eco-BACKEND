@@ -1,7 +1,7 @@
-require('dotenv').config();
-
 //Instancia de la base de datos - Sequelize
 const {Sequelize} = require('sequelize');
+require('dotenv').config();
+
 
 // const {
 //     DB_HOST,
@@ -21,7 +21,7 @@ const {Sequelize} = require('sequelize');
 
 // });
 
-const sequelize = new Sequelize(process.env.DATABASE_URL)
+const db = new Sequelize(process.env.DATABASE_URL)
 
 module.exports = db
 
