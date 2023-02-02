@@ -7,7 +7,8 @@ const {
     DB_HOST,
     DB_USER,
     DB_PASS,
-    DB_NAME
+    DB_NAME,
+    PORT
 } = process.env;
 
 //Conexion a la base de datos
