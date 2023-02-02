@@ -11,7 +11,7 @@ const {
 } = process.env;
 
 //Conexion a la base de datos
-const db = new Sequelize(`postgres://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}`, {
+const db = new Sequelize(`postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${PORT}/${DB_NAME}`, {
     logging: false,
 
     native: false,
