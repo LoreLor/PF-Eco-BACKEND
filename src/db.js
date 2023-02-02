@@ -12,7 +12,7 @@ const {
 } = process.env;
 
 //Conexion a la base de datos
-const db = new Sequelize(`postgres://${DB_USER}:${DB_PASS}@${DB_HOST}:${PORT}/${DB_NAME}`, {
+const db = new Sequelize('postgresql://urdrgpete9u19skx6aop:LnfsWAU3h8oTVKFfketpcoWGziUifJ@bjdtrt4wou8niwngze6s-postgresql.services.clever-cloud.com:5432/bjdtrt4wou8niwngze6s', {
     logging: false,
     native: false,
     define: {
