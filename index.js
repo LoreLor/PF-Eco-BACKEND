@@ -1,6 +1,6 @@
-const app = require("./src/app");
-const sequelize = require("./src/db");
-const init = require('./src/init')
+const app = require("app");
+const sequelize = require("db");
+const init = require('init')
 
 init()
 
