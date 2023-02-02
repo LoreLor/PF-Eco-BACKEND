@@ -33,7 +33,7 @@ const post_forgot_password = async (req, res, next) => {
     });
 
     //Este link se debe enviar por email al usuario
-    const link = `http://localhost:3001/email/reset-password/${user.id}/${token}`;
+    const link = `${SERVER}/email/reset-password/${user.id}/${token}`;
     
     let mailTransporter = nodemailer.createTransport({
         service: "gmail",
